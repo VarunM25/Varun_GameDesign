@@ -17,22 +17,32 @@ os.system('cls')
 
 #guess a number
 # myNumber = 9 instead of using fixed number, we will use a random
-myNumber=random.randint(1,10)
 print('______________________________________________________________________________')
 print('|                                                                            |')
-print('|                                guess a number                              |')
+print('|                                                                            |')
+print('|                                                                            |')
+print('|                            Guess a Number Menu                             |')
+print('|                              Level 1: 1-10                                 |')
+print('|                              Level 2: 1-50                                 |')
+print('|                              Level 3: 1-100                                |')
 print('|                                                                            |')
 print('______________________________________________________________________________')
-GameOn = True
-#randint is random integer which is what we want
-while(GameOn): #NEED COLON
-    userGuess = int(input("Guess a number from 1-10 "))
+Gamelevel = input('Pick a level for the game: \n for level 1 (1-10) type 1 \n for level 2 (1-50) type 2 \n for level 3 (1-100) type 3\n')
+if Gamelevel ==1:
+    myNumber = random.randint(1,10)
+elif Gamelevel ==2:
+    myNumber = random.randint(1,50)
+else:
+    myNumber = random.randint(1,100)
+GameOn=True
+while(GameOn):
+    userGuess= input ('Guess the number: ')
     if myNumber == userGuess:
-        print('You guessed it!')
+        print ('THAT IS RIGHT!')
         GameOn = False
-    else: 
-        print ('Good Luck next time!')
-print ('The number to guess was ', myNumber)
+    else:
+        print('BETTER LUCK NEXT TIME')
+print ('The number was: ', myNumber)
 
 #for if else statements, you have to use a colon at the end and also have a space in the line underneath
 #Always have else on the same vertical line as the if.
