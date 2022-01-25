@@ -17,17 +17,28 @@ os.system('cls')
 
 #guess a number
 # myNumber = 9 instead of using fixed number, we will use a random
-print('______________________________________________________________________________')
-print('|                                                                            |')
-print('|                                                                            |')
-print('|                                                                            |')
-print('|                            Guess a Number Menu                             |')
-print('|                              Level 1: 1-10                                 |')
-print('|                              Level 2: 1-50                                 |')
-print('|                              Level 3: 1-100                                |')
-print('|                                                                            |')
-print('______________________________________________________________________________')
-Gamelevel = int(input('Pick a level for the game: \n for level 1 (1-10) type 1 \n for level 2 (1-50) type 2 \n for level 3 (1-100) type 3\n'))
+def menu():
+    print('______________________________________________________________________________')
+    print('|                                                                            |')
+    print('|                                                                            |')
+    print('|                                                                            |')
+    print('|                            Guess a Number Menu                             |')
+    print('|                              Level 1: 1-10                                 |')
+    print('|                              Level 2: 1-50                                 |')
+    print('|                              Level 3: 1-100                                |')
+    print('|                                                                            |')
+    print('______________________________________________________________________________')
+
+
+menu()
+Menu = True
+while(Menu):
+    try:
+        Gamelevel=int(input("Pick a Level: \n For Level 1 - Type \"1\" \n For Level 2 - Type \"2\" \n For Level 3 - Type \"3\" \n"))
+        Menu = False
+    except ValueError:
+        print ('Sorry, wrong choice, try again')
+
 if Gamelevel == 1:
     myNumber = random.randint(1,10)
 elif Gamelevel == 2:
@@ -44,7 +55,7 @@ while(GameOn):
             print ('THAT IS RIGHT!')
             GameOn = False
         else:
-            print ('Thats wrong... If you want to quit, type \"quit\"')
+            print ('Thats wrong... If you want to quit, type \"quit\"\n')
             if int(userGuess) < myNumber:
                 print ('Almost there, just a little higher!')
             elif int (userGuess) > myNumber:
@@ -54,7 +65,12 @@ while(GameOn):
         GameOn = False
     
 print ('The number was: ', myNumber)
-print ('Credit to Toxicwarp3658 for the quit function')
+print ('Credit to Toxicwarp3658 for the quit function\n')
+
+Restart = input('if you want to play again, type \'restart\'\n')
+if Restart == 'restart':
+    os.system ('cls')
+    menu()
 
 #for if else statements, you have to use a colon at the end and also have a space in the line underneath
 #Always have else on the same vertical line as the if.
