@@ -34,10 +34,10 @@ menu()
 Menu = True
 while(Menu):
     try:
-        Gamelevel=int(input("Pick a Level: \n For Level 1 - Type \"1\" \n For Level 2 - Type \"2\" \n For Level 3 - Type \"3\" \n"))
+        Gamelevel=int(input("This is the guessing game where YOU try to guess the number in MY head! \n Pick a Level: \n For Level 1 - Type \"1\" \n For Level 2 - Type \"2\" \n For Level 3 - Type \"3\" \n"))
         Menu = False
     except ValueError:
-        print ('Sorry, wrong choice, try again')
+        print ('Sorry, wrong choice, try again  ¯\_(ツ)_/¯')
 
 if Gamelevel == 1:
     myNumber = random.randint(1,10)
@@ -52,16 +52,16 @@ while(GameOn):
     userGuess= input ('Guess the number: ')
     if str.isnumeric (userGuess):
         if myNumber == int(userGuess):
-            print ('THAT IS RIGHT!')
+            print ('THAT IS RIGHT!  (⌐■_■)')
             GameOn = False
         else:
-            print ('Thats wrong')
+            print ('Thats wrong (T_T)')
             if int(userGuess) < myNumber:
-                print ('You are almost there, just a little higher!')
+                print ('You are almost there, just a little higher! (☞ﾟヮﾟ)☞')
             elif int (userGuess) > myNumber:
-                print ('You are just a tad bit high there, arent ya mate?')
+                print ('You are just a tad bit high there, arent ya mate? ☜(ﾟヮﾟ☜)')
             print (' ')
-            print ('... If you want to quit, type \"quit\"...\n')
+            print ('... If you want to quit, type \"quit\" ...\n')
     elif str(userGuess) == 'quit':
         print (' ')
         print ('---------------')
