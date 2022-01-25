@@ -55,19 +55,24 @@ while(GameOn):
             print ('THAT IS RIGHT!')
             GameOn = False
         else:
-            print ('Thats wrong... If you want to quit, type \"quit\"\n')
+            print ('Thats wrong')
             if int(userGuess) < myNumber:
-                print ('Almost there, just a little higher!')
+                print ('You are almost there, just a little higher!')
             elif int (userGuess) > myNumber:
-                print ('Just a tad bit high there, arent ya mate?')
+                print ('You are just a tad bit high there, arent ya mate?')
+            print (' ')
+            print ('... If you want to quit, type \"quit\"...\n')
     elif str(userGuess) == 'quit':
+        print (' ')
+        print ('---------------')
         print ('Come back soon!')
         GameOn = False
     
 print ('The number was: ', myNumber)
+print (' ')
 print ('Credit to Toxicwarp3658 for the quit function\n')
 
-Restart = input('if you want to play again, type \'restart\'\n')
+Restart = input('----If you want to play again, type \'restart\'----\n')
 if Restart == 'restart':
     os.system ('cls')
     menu()
