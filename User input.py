@@ -39,19 +39,23 @@ else:
 GameOn=True
 while(GameOn):
     userGuess= input ('Guess the number: ')
-    if myNumber == int(userGuess):
-        print ('THAT IS RIGHT!')
+    if str.isnumeric (userGuess):
+        if myNumber == int(userGuess):
+            print ('THAT IS RIGHT!')
+            GameOn = False
+        else:
+            print ('Thats wrong... If you want to quit, type \"quit\"')
+            if int(userGuess) < myNumber:
+                print ('Almost there, just a little higher!')
+            elif int (userGuess) > myNumber:
+                print ('Just a tad bit high there, arent ya mate?')
+    elif str(userGuess) == 'quit':
+        print ('Come back soon!')
         GameOn = False
-    else:
-        print('BETTER LUCK NEXT TIME')
-        if int(userGuess) < myNumber:
-            print ('Almost there, just a little higher!')
-        elif int (userGuess) > myNumber:
-            print ('Just a tad bit high there, arent ya mate?')
     
 print ('The number was: ', myNumber)
+print ('Credit to Toxicwarp3658 for the quit function')
 
 #for if else statements, you have to use a colon at the end and also have a space in the line underneath
 #Always have else on the same vertical line as the if.
-
 
