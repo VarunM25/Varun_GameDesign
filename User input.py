@@ -29,7 +29,6 @@ print('|                                                                        
 print('______________________________________________________________________________')
 Gamelevel = int(input('Pick a level for the game: \n for level 1 (1-10) type 1 \n for level 2 (1-50) type 2 \n for level 3 (1-100) type 3\n'))
 if Gamelevel == 1:
-    print(Gamelevel)
     myNumber = random.randint(1,10)
 elif Gamelevel == 2:
     myNumber = random.randint(1,50)
@@ -45,7 +44,11 @@ while(GameOn):
         GameOn = False
     else:
         print('BETTER LUCK NEXT TIME')
-        print ('The number was: ', myNumber)
+        if int(userGuess) < myNumber:
+            print ('Almost there, just a little higher!')
+        elif int (userGuess) > myNumber:
+            print ('Just a tad bit high there, arent ya mate?')
+    
 print ('The number was: ', myNumber)
 
 #for if else statements, you have to use a colon at the end and also have a space in the line underneath
