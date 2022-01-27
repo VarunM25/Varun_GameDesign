@@ -26,6 +26,7 @@ def menu():
     print('|                              Level 1: 1-10                                 |')
     print('|                              Level 2: 1-50                                 |')
     print('|                              Level 3: 1-100                                |')
+    print('|                              Level 4: 1-1000000                            |')
     print('|                                                                            |')
     print('______________________________________________________________________________')
 
@@ -35,8 +36,11 @@ while(RunGame):
     Menu = True
     while(Menu):
         try:
-            Gamelevel=int(input("This is the guessing game where YOU try to guess the number in MY head! \n Pick a Level: \n For Level 1 - Type \"1\" \n For Level 2 - Type \"2\" \n For Level 3 - Type \"3\" \n"))
-            Menu = False
+            Gamelevel=int(input("This is the guessing game where YOU try to guess the number in MY head! \n Pick a Level: \n For Level 1 - Type \"1\" \n For Level 2 - Type \"2\" \n For Level 3 - Type \"3\" \n Or, If you are especially daring, enter the DOOM LEVEL by typing \"4\" \n"))
+            if Gamelevel>0 and Gamelevel<5:
+                Menu = False
+            else:
+                print('Sorry, wrong choice, try again  ¯\_(ツ)_/¯')
         except ValueError:
             print ('Sorry, wrong choice, try again  ¯\_(ツ)_/¯')
 
@@ -46,9 +50,13 @@ while(RunGame):
     elif Gamelevel == 2:
         myNumber = random.randint(1,50)
         attempts = 10
-    else:
+    elif Gamelevel == 3:
         myNumber = random.randint (1,100)
         attempts = 15
+    else:
+        myNumber = random.randint (1,1000000)
+        attempts = 3
+        print ('I have sent you to the DOOM LEVEL: Level 4, where you have 3 tries to guess a number from 1 to ONE MILLION\n I hope this teaches you a lesson')
     # print(myNumber)
 
     GameOn=True
