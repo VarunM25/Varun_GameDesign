@@ -108,6 +108,8 @@ while(RunGame):
         print ('Restarting now')
         os.system ('cls')
         menu()
+    else:
+        ('that was not an option')
         
 
 #for if else statements, you have to use a colon at the end and also have a space in the line underneath
