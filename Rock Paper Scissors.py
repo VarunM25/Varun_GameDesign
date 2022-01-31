@@ -143,7 +143,7 @@ while (GameOn):
     elif Replay.lower () == str('y') or Replay.lower() == str('yes'):
         os.system('cls')
         print ('Preparing another round - for your own demise 😈')
-        time.sleep(2)
+        time.sleep(1)
         os.system('cls')
         menu()
         #This last feature is if they type something other than y or n or yes or no in the restart feature
