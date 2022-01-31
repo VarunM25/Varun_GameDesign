@@ -164,7 +164,6 @@ while (GameOn):
         time.sleep(1)
         print ('Bye - Bye!')
         time.sleep(1)
-        os.system('cls')
         GameOn = False
 
         
