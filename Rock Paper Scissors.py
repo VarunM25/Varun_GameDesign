@@ -12,7 +12,7 @@
 #   print statements for who wins etc
 
 
-import os, random
+import os, random, time
 
 os.system ('cls')
 
@@ -134,6 +134,9 @@ while (GameOn):
         print (' ')
         GameOn = False
     elif Replay.lower () == str('y') or Replay.lower() == str('yes'):
+        os.system('cls')
+        print ('Preparing another round - for your own demise 😈')
+        time.sleep(2)
         os.system('cls')
         menu()   
     else:
