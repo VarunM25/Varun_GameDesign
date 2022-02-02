@@ -56,7 +56,7 @@ while (GameOn):
                 print ('That wasn\'t what I asked. Please enter a correct value')
         except ValueError:
             print ('That wasn\'t what I asked. Please enter a correct value') 
-            #This is all just to ensure user gives a valid input - no numbers or anything           
+            #This is all just to ensure user gives a valid input - no numbers or anything  
     myNumber = random.randint (1,3)
     if Choice == 1: #THIS IS THE ROCK PORTION - IF THE COMPUTER PICKS ROCK
         print (' ')
