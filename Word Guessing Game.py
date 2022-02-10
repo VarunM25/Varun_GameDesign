@@ -119,6 +119,7 @@ while GameOn:
     elif tries >6:
         os.system('cls')
         print ('\nHA HA HA, you ran out of tries. Now let me call my brothers... we will feast on your remains... AWOOOOOOOOOO\n AND YOU GET NO POINTS HAHAHHAAH')
+        tries = 0
         restart()
 
 
