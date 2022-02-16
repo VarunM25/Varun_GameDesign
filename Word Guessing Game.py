@@ -19,8 +19,8 @@ def menu():
     ▒░░░░░░░░░░░░░░░░░░░░░░░░▄█████████░░░░░░░░▒            1 - Basketball Players
     ▒░░░░░░░░░░░░░░░░░░░░░▄███████████▌░░░░░░░░▒            2 - Vegetables
     ▒░░░░░░░░░░░░░░░▄▄▄▄██████████████▌░░░░░░░░▒            3 - Computer Parts
-    ▒░░░░░░░░░░░▄▄███████████████████▌░░░░░░░░░▒
-    ▒░░░░░░░░░▄██████████████████████▌░░░░░░░░░▒
+    ▒░░░░░░░░░░░▄▄███████████████████▌░░░░░░░░░▒            4 - End Game
+    ▒░░░░░░░░░▄██████████████████████▌░░░░░░░░░▒            5 - Leaderboard
     ▒░░░░░░░░████████████████████████░░░░░░░░░░▒
     ▒█░░░░░▐██████████▌░▀▀███████████░░░░░░░░░░▒
     ▐██░░░▄██████████▌░░░░░░░░░▀██▐█▌░░░░░░░░░▒▒
@@ -70,22 +70,22 @@ def guessFunction():
 
 menu()
 
-def restart():
-    global GameOn
-    global tries
-    playagain = input('Do you want to LOSE- I mean play again? Yes(1) or No(2)\n p.s. if you type anything, and I mean ANYTHING, else I am sending you back into the death maze - I mean game...')
-    if int(playagain) == 2:
-        os.system('cls')
-        print ('You had', points, 'points')
-        print ('Come back soon... to meet your doom')
-        print ('The high score is', Highscore)
-        GameOn = False
-    else:
-        tries = 0
-        os.system('cls')
-        print ('restarting...')
-        time.sleep (2)
-        menu()
+# def restart():
+#     global GameOn
+#     global tries
+#     playagain = input('Do you want to LOSE- I mean play again? Yes(1) or No(2)\n p.s. if you type anything, and I mean ANYTHING, else I am sending you back into the death maze - I mean game...')
+#     if int(playagain) == 2:
+#         os.system('cls')
+#         print ('You had', points, 'points')
+#         print ('Come back soon... to meet your doom')
+#         print ('The high score is', Highscore)
+#         GameOn = False
+#     else:
+#         tries = 0
+#         os.system('cls')
+#         print ('restarting...')
+#         time.sleep (2)
+#         menu()
 GameOn = True
 tries = 0
 points = 0
@@ -114,6 +114,9 @@ while GameOn:
                 print ('YOU GOT THE HIGH SCORE...I have severely underestimated you...')
                 Highscore += points
                 print ('The high score is', Highscore)
+                time.sleep(5)
+                os.system('cls')
+                menu()
         elif tries >2 and tries <5:
             points = len(word)*3-tries*2
             print ('You now have', points, 'points')
@@ -121,14 +124,17 @@ while GameOn:
                 print ('YOU GOT THE HIGH SCORE...I have severely underestimated you...')
                 Highscore += points
                 print ('The high score is', Highscore)
-        restart()
+            time.sleep(5)
+            os.system('cls')
+            menu()
     elif tries >6:
         os.system('cls')
         print ('\nHA HA HA, you ran out of tries. Now let me call my brothers... we will feast on your remains... AWOOOOOOOOOO\n AND YOU GET NO POINTS HAHAHHAAH')
         print ('The high score is', Highscore)
         tries = 0
-        restart()
-
+        time.sleep (5)
+        os.system('cls')
+        menu()
 
 
 
