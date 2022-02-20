@@ -7,20 +7,19 @@ suits=['♠', '♦', '♣', '♥']
 royals=['J', 'Q', 'K']
 numberCards=[]
 for i in range(2,11):
-    numberCards.append(i) #putting numbers into the deck
-numberCards.insert(0,'A') #adding ace to the deck
-numberCards.extend(royals) #Adding royals now
-#Make a combined list [2,3,4,5,6,7,8,9,10,11,12,J,Q,K, etc...]
-#Make combinations for every card ex: 2c, 2h, 5s ...
-resultDeck=[]
-def Deck(cardnumber): #adds suits to the numbers - makes parameters for diff cards
+    numberCards.append(i) #Adding numbers to deck
+numberCards.insert(0,'A') #Adding the ace to the deck
+numberCards.extend(royals) #Adding royals to the deck (extend instead of append so it isn't list)
+#Make a combined list for all cards [A♠,A♦,A♣,A♥,2♠,2♦,2♣,2♥,...J,Q,K, etc...]
+finalDeck=[]
+def Deck(cardnumber): #the function to add suits to numbers, cardnumber parameter for different cards
     global suits
     global numberCards
-    global resultDeck
-    for i in range (len(suits)):
+    global finalDeck
+    for i in range(len(suits)):
         suits[i]=str(numberCards[cardnumber])+str(suits[i])
-    resultDeck.extend(suits)
-    suits=['♠', '❤', '♣', '♦'] #resetting suites
+    finalDeck.extend(suits)
+    suits=['♠', '♦', '♣', '♥'] #The suits list is reset so it can be added to the next number
 for l in range(0,13):
-    Deck(1)
-print ('The Card Deck:\n\n'+str(resultDeck), '\n\n'+str(len(resultDeck)), 'cards\n')
+    Deck(l) #The function is called for each item in the list, the final deck is created
+print('Deck of Cards:\n\n'+str(finalDeck), '\n\n'+str(len(finalDeck)), 'cards\n')
