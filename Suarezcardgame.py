@@ -1,6 +1,6 @@
 #first let's import random since we will be shuffling
 
-import random, os
+import random, os, time
 
 os.system('cls')
 deck=[]
@@ -86,8 +86,7 @@ def Tempdeck(winner,i):
     player2.pop(i)
     print(winner)
 
-
-
+Gameon = True
 #ask user to hit a key to release cards
 def playgame():
     global player1
@@ -98,30 +97,44 @@ def playgame():
     global click
     global Gameon
     for i in range (0,halfDeck):
-        click=input("Press a any key to get cards")
-        print("Player 1     Player 2")
-        print("     "+player1[i]+"      "+player2[i])
-        if player1[i]>player2[i]:
-            plyr1 +=1
-            Tempdeck(tempPlayer1,i)
-        elif player1[i]<player2[i]:
-            plyr2 +=1
-            Tempdeck(tempPlayer2,i)
+        if Gameon:
+            click=input("Press any key to get cards")
+        os.system('cls')
+        if (plyr1 + plyr2)*2 ==26:
+            if plyr1>plyr2:
+                print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
+            elif plyr2>plyr1:
+                print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
+            endgame()
+            Gameon = False
         else:
-            print ('tie')
-        print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
-    if plyr1>plyr2:
-        print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
-    elif plyr2>plyr1:
-        print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
-    else:
-        print("It's a tie")
-Gameon=True
-while Gameon:
+            print("Player 1     Player 2")
+            print("     "+player1[i]+"      "+player2[i])
+            if player1[i]>player2[i]:
+                plyr1 +=1
+                Tempdeck(tempPlayer1,i)
+            elif player1[i]<player2[i]:
+                plyr2 +=1
+                Tempdeck(tempPlayer2,i)
+            else:
+                print ('tie')
+            print("Player I: "+str(plyr1)+"     Player II: "+ str(plyr2))
+
+def endgame():
+    print ()
+    print ()
+    print ('Thank you for playing - Come back soon!')
+
+
+
+def playinggame():
     createdeck()
     showdeck()
     shuffledeck()
     splitdeck()
     playgame()
-    if len(halfDeck) ==0:
-        Gameon=False
+
+
+playinggame()
+
+
