@@ -37,7 +37,7 @@ def createdeck():
 
 #now let's see the deck!
 def showdeck():
-   
+
     counter=0
     for row in range(4):
         for col in range(13):
@@ -100,11 +100,15 @@ def playgame():
         if Gameon:
             click=input("Press any key to get cards")
         os.system('cls')
-        if (plyr1 + plyr2)*2 ==26:
+        if (plyr1 + plyr2) ==26:
             if plyr1>plyr2:
                 print("Player one won the game "+str(plyr1)+" to "+str(plyr2))
+                player2.clear()
+                player2.extend(tempPlayer2)
             elif plyr2>plyr1:
                 print("Player two won the game "+str(plyr2)+" to "+str(plyr1))
+                player1.clear()
+                player1.extend(tempPlayer1)
             endgame()
             Gameon = False
         else:
