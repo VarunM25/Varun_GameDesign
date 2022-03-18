@@ -43,6 +43,9 @@ pygame.display.set_caption('Circle Eats Square')
 #define colors
 colors={'white':[255,255,255],'red':[255,0,0], 'orange' : [255,85,0], 'mag':[255,0,255], 'purple': [48,25,52], 'navy': [5,31,64], 'pink': [200,3,75], 'aqua' : [51,153,255], 'black': [0,0,0], 'mystery': [100,49,169]}
 
+#jumping square
+jump_move = 10
+jumping = False
 #Get colors
 background = colors.get('pink')
 sqcolor=colors.get('aqua')
@@ -87,6 +90,15 @@ while check:
         xh=xc-(rad/1.5)
         yh=yc-(rad/1.5)
         hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
+#jumping
+    if jumping==False and keys[pygame.K_SPACE]:
+        jumping = True
+    if jumping:
+        square.y-=jump_move
+        jump_move-=1
+        if jump_move< -10:
+            jumping=False
+            jump_move=10
     pygame.draw.rect(screen, sqcolor, square)
     pygame.draw.circle(screen,circlecolor,(xc,yc),rad)
     pygame.draw.rect(screen, hb_color, hitbox)
