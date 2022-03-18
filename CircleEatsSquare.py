@@ -14,7 +14,7 @@ pygame.init()
 WIDTH = 700
 HEIGHT = 700
 check =True
-move =5
+move =1
 #square variable
 xs=20
 ys=20
@@ -25,6 +25,13 @@ hbox=30
 rad=15
 xc=random.randint(rad,WIDTH-rad)
 yc=random.randint(rad,HEIGHT-rad)
+
+#circle hitbox
+c_wbox = 20
+c_hbox = 20
+xh = xc-(rad/1.5)
+yh = yc-(rad/1.5)
+hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
 
 #creating the rectangle
 square =pygame.Rect(xs,ys,wbox,hbox)
@@ -38,8 +45,9 @@ colors={'white':[255,255,255],'red':[255,0,0], 'orange' : [255,85,0], 'mag':[255
 
 #Get colors
 background = colors.get('pink')
-sqcolor=colors.get('navy')
+sqcolor=colors.get('aqua')
 circlecolor=colors.get('white')
+hb_color = colors.get ('white')
 while check:
     screen.fill(background)
     for event in pygame.event.get():
@@ -51,15 +59,39 @@ while check:
         square.x-= move
     if keys [pygame.K_d] and square.x <WIDTH-wbox:
         square.x += move 
-    if keys [pygame.K_w]:
+    if keys [pygame.K_w] and square.y>=move:
         square.y -= move
-    if keys [pygame.K_s]:
-        square.y += move        
+    if keys [pygame.K_s] and square.y<= HEIGHT-(hbox+move):
+        square.y += move
+#Circle movement
+    if keys [pygame. K_LEFT] and xc >=move:
+        xc-=move
+        hitbox.x-=move
+    if keys [pygame. K_RIGHT] and xc <= WIDTH -move:  
+        xc+=move
+        hitbox.x+=move
+    if keys [pygame. K_UP] and yc >=move:  
+        yc-=move
+        hitbox.y-=move
+    if keys [pygame. K_DOWN] and yc <= HEIGHT -move:
+        yc+=move
+        hitbox.y+=move 
+#collisions
+    if square.colliderect(hitbox):
+        xs=random.randint(0,WIDTH-wbox)
+        ys=random.randint(0, HEIGHT-hbox)
+        square = pygame.Rect(xs,ys,wbox,hbox)
+        rad+=10
+        c_wbox+=13.5
+        c_hbox+=13.5
+        xh=xc-(rad/1.5)
+        yh=yc-(rad/1.5)
+        hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
     pygame.draw.rect(screen, sqcolor, square)
     pygame.draw.circle(screen,circlecolor,(xc,yc),rad)
-
+    pygame.draw.rect(screen, hb_color, hitbox)
     pygame.display.update()
-    pygame.time.delay(10)
+    pygame.time.delay(3)
 
 
 
