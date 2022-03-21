@@ -48,9 +48,20 @@ jump_move = 10
 jumping = False
 #Get colors
 background = colors.get('pink')
-sqcolor=colors.get('aqua')
 circlecolor=colors.get('white')
 hb_color = colors.get ('white')
+randColor = ''
+def changecolor():
+    global randColor
+    checkcolor = True
+    while checkcolor:
+        randColor=random.choice(list(colors))
+        if background == randColor:
+            randColor=random.choice(list(colors))
+        else:
+            checkcolor = False
+changecolor()
+sqcolor=colors.get(randColor)
 while check:
     screen.fill(background)
     for event in pygame.event.get():
@@ -83,6 +94,8 @@ while check:
     if square.colliderect(hitbox):
         xs=random.randint(0,WIDTH-wbox)
         ys=random.randint(0, HEIGHT-hbox)
+        changecolor()
+        sqcolor=colors.get(randColor)
         square = pygame.Rect(xs,ys,wbox,hbox)
         rad+=10
         c_wbox+=13.5
