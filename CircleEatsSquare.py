@@ -11,8 +11,8 @@ pygame.init()
 #declare constants, variables, list, dictionaries, any object
 
 #screen size
-WIDTH = 700
-HEIGHT = 700
+WIDTH = 900
+HEIGHT = 900
 check =True
 move =1
 #square variable
