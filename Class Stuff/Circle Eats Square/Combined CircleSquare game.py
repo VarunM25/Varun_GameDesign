@@ -109,7 +109,18 @@ def instructions():
     text= INSTRUCTIONS_FNT.render('--> The circle is trying to "eat" the square while the square runs away', 1, (0,0,0))
     screen.blit(text,(50,350))
     text= MENU_FNT.render('Return to Main Menu', 1, (0,0,0))
-    screen.blit(text,(150,400))
+    screen.blit(text,(200,400))
+def settings():
+    text= INSTRUCTIONS_FNT.render('--> Screen Size', 1, (0,0,0))
+    screen.blit(text,(50,200))
+    text= INSTRUCTIONS_FNT.render('--> Background Color', 1, (0,0,0))
+    screen.blit(text,(50,250))
+    text= INSTRUCTIONS_FNT.render('--> Circle Color', 1, (0,0,0))
+    screen.blit(text,(50,300))
+    text= INSTRUCTIONS_FNT.render('--> Sound On/Off', 1, (0,0,0))
+    screen.blit(text,(50,350))
+    text= MENU_FNT.render('Return to Main Menu', 1, (0,0,0))
+    screen.blit(text,(200,400))
 
 #get the width of the text
 
@@ -147,13 +158,6 @@ def MainMenu(Mlist):
     pygame.time.delay(10)
 
 
-# text=INST_FNT.render("---- W to Move Up ----")
-# screen.blit(text,(50,250))
-# text=INST_FNT.render("---- S to Move Down ----")
-# screen.blit(text,(50,150))
-# text=INST_FNT.render("---- A to Move Left ----")
-# screen.blit(text,(50,100))
-# text=INST_FNT.render("---- D to Move Right ----")
 
 
 
@@ -198,6 +202,13 @@ while check:
             instructions()
             Inst = True
             pygame.display.update()
+        if ((mouseposition[0] >50 and mouseposition[0] <85) and (mouseposition[1] >290 and mouseposition[1] <330))or INST :
+            MAIN = False
+            screen.fill(background)
+            TitleMenu("SETTINGS")
+            settings()
+            Settings = True
+            pygame.display.update()        
         if ((mouseposition[0]>150 and mouseposition[0]<430) and (mouseposition[1] >400 and mouseposition[1]<450)):
             Inst = False
             screen.fill(background)
