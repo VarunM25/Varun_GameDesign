@@ -16,6 +16,7 @@
 # K_SPACE               Jump
 #initialize pygame
 import os, random, time, pygame
+from re import X
 
 #initialize pygame
 pygame.init()
@@ -121,6 +122,55 @@ def settings():
     screen.blit(text,(50,350))
     text= MENU_FNT.render('Return to Main Menu', 1, (0,0,0))
     screen.blit(text,(200,400))
+def actualgame():
+    if keys [pygame.K_a] and square.x >= move:
+        square.x-= move
+    if keys [pygame.K_d] and square.x <WIDTH-wbox:
+        square.x += move 
+    if keys [pygame.K_w] and square.y>=move:
+        square.y -= move
+    if keys [pygame.K_s] and square.y<= HEIGHT-(hbox+move):
+        square.y += move
+#Circle movement
+    if keys [pygame. K_LEFT] and xc >=move:
+        xc-=move
+        hitbox.x-=move
+    if keys [pygame. K_RIGHT] and xc <= WIDTH -move:  
+        xc+=move
+        hitbox.x+=move
+    if keys [pygame. K_UP] and yc >=move:  
+        yc-=move
+        hitbox.y-=move
+    if keys [pygame. K_DOWN] and yc <= HEIGHT -move:
+        yc+=move
+        hitbox.y+=move 
+#collisions
+    if square.colliderect(hitbox):
+        xs=random.randint(0,WIDTH-wbox)
+        ys=random.randint(0, HEIGHT-hbox)
+        changecolor()
+        sqcolor=colors.get(randColor)
+        square = pygame.Rect(xs,ys,wbox,hbox)
+        rad+=10
+        c_wbox+=13.5
+        c_hbox+=13.5
+        xh=xc-(rad/1.5)
+        yh=yc-(rad/1.5)
+        hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
+#jumping
+    if jumping==False and keys[pygame.K_SPACE]:
+        jumping = True
+    if jumping:
+        square.y-=jump_move
+        jump_move-=1
+        if jump_move< -10:
+            jumping=False
+            jump_move=10
+    pygame.draw.rect(screen, sqcolor, square)
+    pygame.draw.circle(screen,circlecolor,(xc,yc),rad)
+    pygame.draw.rect(screen, hb_color, hitbox)
+    pygame.display.update()
+    pygame.time.delay(3)
 
 #get the width of the text
 
@@ -202,62 +252,20 @@ while check:
             instructions()
             Inst = True
             pygame.display.update()
-        if ((mouseposition[0] >50 and mouseposition[0] <85) and (mouseposition[1] >290 and mouseposition[1] <330))or INST :
+        if ((mouseposition[0] >50 and mouseposition[0] <85) and (mouseposition[1] >290 and mouseposition[1] <330)):
             MAIN = False
             screen.fill(background)
             TitleMenu("SETTINGS")
             settings()
             Settings = True
-            pygame.display.update()        
+            pygame.display.update()     
+        if ((mouseposition[0] >50 and mouseposition[0] <80) and (mouseposition[1] >350 and mouseposition[1] <380)):
+            MAIN = False
+            screen.fill(background)
+            actualgame()
+            Lev1 = True
+            pygame.display.update()   
         if ((mouseposition[0]>150 and mouseposition[0]<430) and (mouseposition[1] >400 and mouseposition[1]<450)):
             Inst = False
             screen.fill(background)
             MAIN = True
-#     if keys [pygame.K_a] and square.x >= move:
-#         square.x-= move
-#     if keys [pygame.K_d] and square.x <WIDTH-wbox:
-#         square.x += move 
-#     if keys [pygame.K_w] and square.y>=move:
-#         square.y -= move
-#     if keys [pygame.K_s] and square.y<= HEIGHT-(hbox+move):
-#         square.y += move
-# #Circle movement
-#     if keys [pygame. K_LEFT] and xc >=move:
-#         xc-=move
-#         hitbox.x-=move
-#     if keys [pygame. K_RIGHT] and xc <= WIDTH -move:  
-#         xc+=move
-#         hitbox.x+=move
-#     if keys [pygame. K_UP] and yc >=move:  
-#         yc-=move
-#         hitbox.y-=move
-#     if keys [pygame. K_DOWN] and yc <= HEIGHT -move:
-#         yc+=move
-#         hitbox.y+=move 
-# #collisions
-#     if square.colliderect(hitbox):
-#         xs=random.randint(0,WIDTH-wbox)
-#         ys=random.randint(0, HEIGHT-hbox)
-#         changecolor()
-#         sqcolor=colors.get(randColor)
-#         square = pygame.Rect(xs,ys,wbox,hbox)
-#         rad+=10
-#         c_wbox+=13.5
-#         c_hbox+=13.5
-#         xh=xc-(rad/1.5)
-#         yh=yc-(rad/1.5)
-#         hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
-# #jumping
-#     if jumping==False and keys[pygame.K_SPACE]:
-#         jumping = True
-#     if jumping:
-#         square.y-=jump_move
-#         jump_move-=1
-#         if jump_move< -10:
-#             jumping=False
-#             jump_move=10
-#     pygame.draw.rect(screen, sqcolor, square)
-#     pygame.draw.circle(screen,circlecolor,(xc,yc),rad)
-#     pygame.draw.rect(screen, hb_color, hitbox)
-#     pygame.display.update()
-#     pygame.time.delay(3)
