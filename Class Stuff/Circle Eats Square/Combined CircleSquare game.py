@@ -15,9 +15,9 @@
 # K_s                   down square
 # K_SPACE               Jump
 #initialize pygame
-import os, random, time, pygame
+import os, random, time, pygame, datetime
 from re import X
-
+name = input("what is your name?   ")
 #initialize pygame
 pygame.init()
 
@@ -28,25 +28,6 @@ HEIGHT=700
 check =True
 move =1
 #square variable
-xs=20
-ys=20
-wbox=30
-hbox=30
-
-#circle variables
-rad=15
-xc=random.randint(rad,WIDTH-rad)
-yc=random.randint(rad,HEIGHT-rad)
-
-#circle hitbox
-c_wbox = 20
-c_hbox = 20
-xh = xc-(rad/1.5)
-yh = yc-(rad/1.5)
-hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
-
-#creating the rectangle
-square =pygame.Rect(xs,ys,wbox,hbox)
 
 #create screen
 screen=pygame.display.set_mode((WIDTH,HEIGHT))
@@ -123,6 +104,26 @@ def settings():
     text= MENU_FNT.render('Return to Main Menu', 1, (0,0,0))
     screen.blit(text,(200,400))
 def actualgame():
+    xs=20
+    ys=20
+    wbox=30
+    hbox=30
+
+    #circle variables
+    rad=15
+    xc=random.randint(rad,WIDTH-rad)
+    yc=random.randint(rad,HEIGHT-rad)
+
+    #circle hitbox
+    c_wbox = 20
+    c_hbox = 20
+    xh = xc-(rad/1.5)
+    yh = yc-(rad/1.5)
+    hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
+
+    #creating the rectangle
+    square =pygame.Rect(xs,ys,wbox,hbox)
+
     if keys [pygame.K_a] and square.x >= move:
         square.x-= move
     if keys [pygame.K_d] and square.x <WIDTH-wbox:
@@ -173,7 +174,13 @@ def actualgame():
     pygame.time.delay(3)
 
 #get the width of the text
+def KeepScore(score):
+    date=datetime.datetime.now()
+    scoreLine=str(score)+"\t "+name+"\t "+date.strftime('%m/%d/%Y'+'\n')
 
+    myFile=open('sce.txt', 'a')
+    myFile.write(scoreLine)
+    myFile.close()
 
 #Create First Button
 
@@ -193,7 +200,7 @@ Score=False
 Exit = False
 menu_sq=colors.get('black')
 
-square=pygame.Rect(xs,ys,wbox,hbox)
+square=pygame.Rect(xs,ys,wb,hb)
 def MainMenu(Mlist):
     txty=250
     square.y=250
@@ -240,6 +247,10 @@ while check:
     for event in pygame.event.get():
         if event.type ==pygame.QUIT:
             check = False
+            MAIN = True
+            Lev_1 = True
+
+            print ('I want out', check)
 
     keys = pygame.key.get_pressed() #this returns a list
     if event.type ==pygame.MOUSEBUTTONDOWN:
