@@ -6,6 +6,7 @@
 #use dictionaries
 
 import os, random, pygame, datetime
+from turtle import screensize
 
 #Objective is for rectangle to run away from circle
 
@@ -57,11 +58,22 @@ SCOREBOARD=False
 
 EXIT=False
 
+SCREENSIZE = False
+
+BKGD = False
+
+CR_COLOR = False
+
 #creating screen
 
 screen=pygame.display.set_mode((WIDTH,HEIGHT))
 
 pygame.display.set_caption('Circle eats Square')
+
+
+
+
+
 
  
 
@@ -77,8 +89,11 @@ ys_btn=250
 
 MenuList=['Play','Instruction','Setting','Level 1','Level 2','Level 3','Scoreboard','Exit']
 
-SettingList=['Screen Size','Sound','Music','Circle Color']
+SettingList=['Screen Size','Background Color','Sound','Circle Color']
 
+Screensize = ['1000 x 1000', '800 x 800', '600 x 600']
+
+Bkgd = ['Red', 'Green', 'Blue', 'Cyan', 'Magenta', 'Black', 'White']
  
 
 #define colors
@@ -95,7 +110,7 @@ randColor=random.choice(list(colors))
 
 #Get colors
 
-background=colors.get('white')
+background=colors.get('black')
 
 cr_color=colors.get('black')
 
@@ -104,6 +119,7 @@ hb_color=colors.get('black')
 sq_btn_color=colors.get('orange')
 
 #Giving the square a random color
+
 
 def ChangeColor():
 
@@ -289,7 +305,7 @@ def TitleMenu(Message):
 
     text=TITLE_FNT.render(Message,1,'green')
 
-    screen.fill('black')
+    screen.fill(background)
 
     xt=WIDTH/2-text.get_width()/2
 
@@ -309,7 +325,7 @@ def MainMenu(Mlist):
 
         message=Mlist[i]
 
-        text=INST_FNT.render(message,1,'green')
+        text=INST_FNT.render(message,1,'white')
 
         screen.blit(text,(90,ty))
 
@@ -327,7 +343,7 @@ def MainMenu(Mlist):
 
 #instructions screen variables
 
-title=TITLE_FNT.render('MENU',1,'green')
+title=TITLE_FNT.render('Instructions',1,'green')
 
 xt=WIDTH/2-title.get_width()/2
 
@@ -403,9 +419,12 @@ def keepScore(score):
 
     myFile.close()
 
- 
+xm=0
+ym=0
 
 while check:
+
+    screen.fill (background)
 
     if MAIN:
 
@@ -479,6 +498,32 @@ while check:
 
         pygame.display.update() 
 
+    if SCREENSIZE:
+
+        pygame.display.set_caption('SCREEN SIZE')
+
+        TitleMenu("Screen Size")
+
+        MainMenu(Screensize)
+
+    if BKGD:
+
+        pygame.display.set_caption('Background Colors')
+
+        TitleMenu("Background")
+
+        MainMenu(Bkgd)
+
+    if CR_COLOR:
+
+        pygame.display.set_caption('Circle colors')
+
+        TitleMenu("Circle Colors")
+
+        MainMenu(Bkgd)
+
+    
+
 
 
     if EXIT:
@@ -505,53 +550,200 @@ while check:
 
         print(mouse_pos)
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >250 and mouse_pos[1] <290))or GAME:
+        xm = mouse_pos[0]
+
+        ym = mouse_pos[1]
+
+        if MAIN and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MAIN:
 
             MAIN=False
 
             GAME=True
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >300 and mouse_pos[1] <340))or INST :
+        if MAIN and ((xm >20 and xm <80) and (ym >300 and ym <340))and MAIN :
 
             MAIN=False
 
             INST=True
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >350 and mouse_pos[1] <390))or SETT :
+        if MAIN and ((xm >20 and xm <80) and (ym >350 and ym <390))and MAIN :
 
             MAIN=False
 
             SETT=True
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >400 and mouse_pos[1] <440))or LEV_I :
+        if MAIN and ((xm >20 and xm <80) and (ym >400 and ym <440))and MAIN :
 
             MAIN=False
 
             LEV_I=True
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >450 and mouse_pos[1] <490))or LEV_II :
+        if MAIN and ((xm >20 and xm <80) and (ym >450 and ym <490))and MAIN :
 
             MAIN=False
 
             LEV_II=True
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >500 and mouse_pos[1] <540))or LEV_III :
+        if MAIN and ((xm >20 and xm <80) and (ym >500 and ym <540))and MAIN :
 
             MAIN=False
 
             LEV_III=True
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >550 and mouse_pos[1] <590))or SCOREBOARD :
+        if MAIN and ((xm >20 and xm <80) and (ym >550 and ym <590))and MAIN :
 
             MAIN=False
 
             SCOREBOARD=True
 
-        if MAIN and ((mouse_pos[0] >20 and mouse_pos[0] <80) and (mouse_pos[1] >600 and mouse_pos[1] <640))or EXIT :
+        if MAIN and ((xm >20 and xm <80) and (ym >600 and ym <640))and MAIN :
 
             MAIN=False
 
             EXIT=True
+
+        if SETT and ((xm >20 and xm <80) and (ym >250 and ym <290)) and SETT:
+
+            SETT=False
+
+            SCREENSIZE=True
+
+        if SCREENSIZE and ((xm >20 and xm <80) and (ym >250 and ym <290)) and SCREENSIZE:
+            
+            WIDTH = 1000
+
+            HEIGHT = 1000
+
+            screen=pygame.display.set_mode((WIDTH,HEIGHT))
+
+        if SCREENSIZE and ((xm >20 and xm <80) and (ym >300 and ym <340))and SCREENSIZE :
+
+            WIDTH=800
+
+            HEIGHT = 800
+
+            screen=pygame.display.set_mode((WIDTH,HEIGHT))
+
+        if SCREENSIZE and ((xm >20 and xm <80) and (ym >350 and ym <390))and SCREENSIZE :
+
+            WIDTH=600
+
+            HEIGHT=600
+
+            screen=pygame.display.set_mode((WIDTH,HEIGHT))
+        
+        if SETT and ((xm >20 and xm <80) and (ym >300 and ym <340))and SETT :
+
+            SETT=False
+
+            BKGD=True
+
+        if BKGD and ((xm >20 and xm <80) and (ym >250 and ym <290)) and BKGD:
+
+            background=colors.get('red')
+
+            pygame.display.update()
+
+        if BKGD and ((xm >20 and xm <80) and (ym >300 and ym <340))and BKGD :
+
+            background=colors.get('green')
+
+            pygame.display.update()
+
+        if BKGD and ((xm >20 and xm <80) and (ym >350 and ym <390))and BKGD:
+
+            background=colors.get('blue')
+
+            pygame.display.update()
+
+        if BKGD and ((xm >20 and xm <80) and (ym >400 and ym <440))and BKGD:
+
+            background=colors.get('cyan')
+
+            pygame.display.update()
+
+        if BKGD and ((xm >20 and xm <80) and (ym >450 and ym <490))and BKGD:
+
+            background=colors.get('magenta')
+
+            pygame.display.update()
+
+        if BKGD and ((xm >20 and xm <80) and (ym >500 and ym <540))and BKGD:
+
+            background=colors.get('black')
+
+            pygame.display.update()
+
+        if BKGD and ((xm >20 and xm <80) and (ym >550 and ym <590))and BKGD:
+
+            background=colors.get('white')
+
+            pygame.display.update()
+
+        if SETT and ((xm >20 and xm <80) and (ym >400 and ym <440))and SETT :
+
+            SETT=False
+
+            CR_COLOR=True
+
+        if CR_COLOR and ((xm >20 and xm <80) and (ym >250 and ym <290)) and CR_COLOR:
+
+            cr_color=colors.get('red')
+
+            hb_color=colors.get('red')
+
+            pygame.display.update()
+
+        if CR_COLOR and ((xm >20 and xm <80) and (ym >300 and ym <340))and CR_COLOR :
+
+            cr_color=colors.get('green')
+
+            hb_color=colors.get('green')
+
+            pygame.display.update()
+
+        if CR_COLOR and ((xm >20 and xm <80) and (ym >350 and ym <390))and CR_COLOR:
+
+            cr_color=colors.get('blue')
+
+            hb_color=colors.get('blue')
+
+            pygame.display.update()
+
+        if CR_COLOR and ((xm >20 and xm <80) and (ym >400 and ym <440))and CR_COLOR:
+
+            cr_color=colors.get('cyan')
+
+            hb_color=colors.get('cyan')
+
+            pygame.display.update()
+
+        if CR_COLOR and ((xm >20 and xm <80) and (ym >450 and ym <490))and CR_COLOR:
+
+            cr_color=colors.get('magenta')
+
+            hb_color=colors.get('magenta')
+
+            pygame.display.update()
+
+        if CR_COLOR and ((xm >20 and xm <80) and (ym >500 and ym <540))and CR_COLOR:
+
+            cr_color=colors.get('black')
+
+            hb_color=colors.get('black')
+
+            pygame.display.update()
+
+        if CR_COLOR and ((xm >20 and xm <80) and (ym >550 and ym <590))and CR_COLOR:
+
+            cr_color=colors.get('white')
+
+            hb_color=colors.get('white')
+
+            pygame.display.update()
+
+
+        
 
  
 
@@ -573,99 +765,15 @@ while check:
 
             EXIT=False
 
+            SCREENSIZE = False
+
+            BKGD = False
+
+            CR_COLOR = False
+
             MAIN=True
 
- 
 
-    # screen.fill(background)
-
-    # for case in pygame.event.get():
-
-    #     if case.type==pygame.QUIT:
-
-    #         check=False
-
-    # keys=pygame.key.get_pressed()
-
-    # #movement for square
-
-    # if keys[pygame.K_LEFT] and square.x>=move:
-
-    #     square.x-=move
-
-    # if keys[pygame.K_RIGHT] and square.x<=WIDTH-(wbox+move):
-
-    #     square.x+=move
-
-    # if keys[pygame.K_UP] and square.y>=move:
-
-    #     square.y-=move
-
-    # if keys[pygame.K_DOWN] and square.y<=HEIGHT-(hbox+move):
-
-    #     square.y+=move
-
-    # #movement for circle
-
-    # if keys[pygame.K_a] and xc>=move:
-
-    #     xc-=move
-
-    #     hitbox.x-=move
-
-    # if keys[pygame.K_d] and xc<=WIDTH-move:
-
-    #     xc+=move
-
-    #     hitbox.x+=move
-
-    # if keys[pygame.K_w] and yc>=move:
-
-    #     yc-=move
-
-    #     hitbox.y-=move
-
-    # if keys[pygame.K_s] and yc<=HEIGHT-move:
-
-    #     yc+=move
-
-    #     hitbox.y+=move
-
-    # #collisions
-
-    # if square.colliderect(hitbox):
-
-    #     xs=random.randint(0,WIDTH-wbox)
-
-    #     ys=random.randint(0,HEIGHT-hbox)
-
-    #     ChangeColor()
-
-    #     sq_color=colors.get(randColor)
-
-    #     square=pygame.Rect(xs,ys,wbox,hbox)
-
-    #     rad+=10
-
-    #     c_wbox+=13.5
-
-    #     c_hbox+=13.5
-
-    #     xh=xc-(rad/1.5)
-
-    #     yh=yc-(rad/1.5)
-
-    #     hitbox=pygame.Rect(xh,yh,c_wbox,c_hbox)
-
- 
-
-    #Finish circle
-
-    # pygame.draw.rect(screen, sq_color, square)
-
-    # pygame.draw.circle(screen, cr_color, (xc,yc), rad)
-
-    # pygame.draw.rect(screen, hb_color, hitbox)
 
     pygame.display.update()
 
