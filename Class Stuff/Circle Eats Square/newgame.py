@@ -64,6 +64,8 @@ SCREENSIZE = False
 
 BKGD = False
 
+MVMT = False
+
 CR_COLOR = False
 
 #creating screen
@@ -91,9 +93,11 @@ ys_btn=250
 
 MenuList=['Play','Instruction','Setting','Level 1','Level 2','Level 3','Scoreboard','Exit']
 
-SettingList=['Screen Size','Background Color','Square','Circle Color']
+SettingList=['Screen Size','Background Color','Sound','Circle Color', 'Movement Speed'] 
 
 Screensize = ['1000 x 1000', '800 x 800', '600 x 600']
+
+Mvmtspeed = ['Normal', 'Fast', 'Hyperspeed']
 
 Bkgd = ['Red', 'Green', 'Blue', 'Cyan', 'Magenta', 'Black', 'White']
  
@@ -296,7 +300,7 @@ def Game():
         pygame.display.update()
 
         pygame.time.delay(3)
-        
+
     Gamescore = rad-15
 
 
@@ -534,7 +538,14 @@ while check:
 
         MainMenu(Bkgd)
 
-    
+    if MVMT:
+
+        pygame.display.set_caption('Movement Speed')
+
+        TitleMenu("Speed")
+
+        MainMenu(Mvmtspeed)
+
 
 
 
@@ -755,6 +766,24 @@ while check:
 
             pygame.display.update()
 
+        if SETT and ((xm >20 and xm <80) and (ym >450 and ym <490))and SETT :
+
+            SETT=False
+
+            MVMT=True
+
+        if MVMT and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MVMT:
+            
+            move = 1
+
+        if MVMT and ((xm >20 and xm <80) and (ym >300 and ym <340))and MVMT :
+
+            move = 5
+
+        if MVMT and ((xm >20 and xm <80) and (ym >350 and ym <390))and MVMT :
+
+            move = 10
+
 
         
 
@@ -784,7 +813,10 @@ while check:
 
             CR_COLOR = False
 
+            MVMT = False
+
             MAIN=True
+
 
 
 
