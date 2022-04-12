@@ -40,6 +40,8 @@ move=1
 
 rad=15
 
+Gamescore = 0
+
 MAIN=True
 
 GAME=False
@@ -112,9 +114,9 @@ randColor=random.choice(list(colors))
 
 background=colors.get('black')
 
-cr_color=colors.get('black')
+cr_color=colors.get('white')
 
-hb_color=colors.get('black')
+hb_color=colors.get('white')
 
 sq_btn_color=colors.get('orange')
 
@@ -147,7 +149,9 @@ sq_color=colors.get(randColor)
 
 def Game():
 
-    global screen, move, check, playGame, sq_color, GAME, MAIN, WIDTH, HEIGHT
+    global screen, move, check, playGame, sq_color, GAME, MAIN, WIDTH, HEIGHT, Gamescore
+
+    Gamescore = 0
 
     #square variables
 
@@ -292,8 +296,10 @@ def Game():
         pygame.display.update()
 
         pygame.time.delay(3)
+        
+    Gamescore = rad-15
 
- 
+
 
 #Fonts
 
@@ -419,7 +425,7 @@ def keepScore(score):
 
     #when you write it erases the previous text
 
-    myFile=open('Class Stuff\sce.txt','a')
+    myFile=open('Class Stuff\Circle Eats Square\sce.txt','a')
 
     myFile.write(scoreLine)
 
@@ -536,7 +542,6 @@ while check:
 
         TitleMenu("Game Over")
 
-        Gamescore = rad-15
 
         keepScore(Gamescore)
 
