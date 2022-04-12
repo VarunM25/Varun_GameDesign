@@ -89,7 +89,7 @@ ys_btn=250
 
 MenuList=['Play','Instruction','Setting','Level 1','Level 2','Level 3','Scoreboard','Exit']
 
-SettingList=['Screen Size','Background Color','Sound','Circle Color']
+SettingList=['Screen Size','Background Color','Square','Circle Color']
 
 Screensize = ['1000 x 1000', '800 x 800', '600 x 600']
 
@@ -192,6 +192,12 @@ def Game():
     while playGame:
 
         screen.fill(background)
+
+        for case in pygame.event.get():
+
+            if case==pygame.QUIT:
+
+                check = False
 
         keys=pygame.key.get_pressed()
 
@@ -413,7 +419,7 @@ def keepScore(score):
 
     #when you write it erases the previous text
 
-    myFile=open('Class Stuff\score.txt','a')
+    myFile=open('Class Stuff\sce.txt','a')
 
     myFile.write(scoreLine)
 
@@ -482,7 +488,7 @@ while check:
 
         TitleMenu("SCOREBOARD")
 
-        myFile=open('Class Stuff\Circle Eats Square\score.txt','r')
+        myFile=open('Class Stuff\Circle Eats Square\sce.txt','r')
 
         scoreboardlines = myFile.readlines()
 
@@ -530,9 +536,11 @@ while check:
 
         TitleMenu("Game Over")
 
-        Gamescore = rad*5
+        Gamescore = rad-15
 
         keepScore(Gamescore)
+
+        check = False
 
  
 
