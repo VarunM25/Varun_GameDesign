@@ -6,9 +6,9 @@ pygame.display.set_caption("First Game")
 
 walkRight = [pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R1.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R2.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R3.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R4.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R5.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R6.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R7.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R8.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\R9.png')]
 walkLeft = [pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L1.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L2.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L3.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L4.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L5.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L6.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L7.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L8.png'), pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\L9.png')]
-bg = pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\\bg.jpg')
+bg = pygame.image.load('Class Stuff\images\\background.jpg')
 char = pygame.image.load('Class Stuff\images\Pygame-Tutorials-master\Game\standing.png')
-
+die = pygame.image.load('Class Stuff\images\\the-death-star-star-wars-death-star-11562902961caqjz9dfv9.png')
 x = 50
 y = 400
 width = 40
