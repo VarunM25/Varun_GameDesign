@@ -14,8 +14,7 @@ bg3 = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkg
 bg4 = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd4.jpg'), (700,600))
 bg5 = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd5.jpg'), (700,600))
 
-#Characters
-
+#Character movements
 char = pygame.image.load('Class Stuff\images\Idle-stance_04.png')
 attacking = [pygame.image.load('Class Stuff\images\Attacking_01.png'), pygame.image.load('Class Stuff\images\Attacking_02.png'), pygame.image.load('Class Stuff\images\Attacking_03.png'), pygame.image.load('Class Stuff\images\Attacking_04.png'), pygame.image.load('Class Stuff\images\Attacking_05.png'), pygame.image.load('Class Stuff\images\Attacking_06.png'), pygame.image.load('Class Stuff\images\Attacking_07.png')]
 running = [pygame.image.load('Class Stuff\images\Running_01.png'), pygame.image.load('Class Stuff\images\Running_02.png'), pygame.image.load('Class Stuff\images\Running_03.png'), pygame.image.load('Class Stuff\images\Running_04.png'), pygame.image.load('Class Stuff\images\Running_05.png'), pygame.image.load('Class Stuff\images\Running_06.png'), pygame.image.load('Class Stuff\images\Running_07.png'), pygame.image.load('Class Stuff\images\Running_08.png'), pygame.image.load('Class Stuff\images\Running_09.png'), pygame.image.load('Class Stuff\images\Running2_01.png'), pygame.image.load('Class Stuff\images\Running2_02.png'), pygame.image.load('Class Stuff\images\Running2_03.png')]
@@ -24,7 +23,15 @@ crouching = [pygame.image.load('Class Stuff\images\crouching_01.png'), pygame.im
 thwomp = [pygame.image.load('Class Stuff\images\\thwomp.png')]
 fireball = [pygame.image.load('Class Stuff\images\\fireball_02.png')]
 
+#robots/bad guys
+badrobot1 = [pygame.image.load('Class Stuff\images\smallbaddude1.png')]
+badrobot2 = [pygame.image.load('Class Stuff\images\\bigbaddude3.png')]
+badrobot3 = [pygame.image.load('Class Stuff\images\\bigbaddude1.png')]
+badrobot4 = [pygame.image.load('Class Stuff\images\\bigbaddude2.png')]
+bossrobot = [pygame.image.load('Class Stuff\images\Reallybaddude.png')]
+golem = [pygame.image.load('Class Stuff\images\Golem1.png')]
 
+#Booleans:
 Area1 = True
 Area2 = False
 Area3 = False
