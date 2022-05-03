@@ -11,28 +11,29 @@ win=pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('Final Game')
 
 #background variables
-bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd1.jpg'), (700,600))
-bg2 = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd2.png'), (700,600))
-bg3 = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd3.png'), (700,600))
-bg4 = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd4.png'), (700,600))
-bg5 = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd5.jpg'), (700,600))
+bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd1.jpg'), (700,600))
+bg2 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd2.png'), (700,600))
+bg3 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd3.png'), (700,600))
+bg4 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd4.png'), (700,600))
+bg5 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd5.jpg'), (700,600))
 
 # Character movements
 char = pygame.transform.scale(pygame.image.load('Class Stuff\images\Idle-stance_04.png'), (64,64))
-attacking = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking_03.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking_04.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking_05.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking_06.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking_07.png'))]
-running = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_03.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_04.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_05.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_06.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_07.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_08.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running_09.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running2_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running2_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running2_03.png'), (64,64))]
-jumping = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping_03.png'))]
-crouching = [pygame.transform.scale(pygame.image.load('Class Stuff\images\crouching_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\crouching_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\crouching_03.png'))]
-thwomp = [pygame.image.load('Class Stuff\images\\thwomp.png')]
-fireball = [pygame.image.load('Class Stuff\images\\fireball_02.png')]
+attacking = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking\\attack_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking\\attack_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking\\attack_03.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking\\attack_04.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking\\attack_05.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking\\attack_06.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Attacking\\attack_07.png'), (64,64))]
+running = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_03.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_04.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_05.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_06.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_07.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_08.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_09.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\Run2_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\Run2_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\Run2_03.png'), (64,64))]
+jumping = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping\Jumping_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping\Jumping_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping\Jumping_03.png'), (64,64))]
+crouching = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Crouching\crouching_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Crouching\crouching_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Crouching\crouching_03.png'), (64,64))]
+thwomp = [pygame.image.load('Class Stuff\images\Bad dudes\\thwomp.png')]
+fireball = [pygame.image.load('Class Stuff\images\Fireball\\fireball_02.png')]
 
 #robots/bad guys
-badrobot1 = [pygame.image.load('Class Stuff\images\smallbaddude1.png')]
-badrobot2 = [pygame.image.load('Class Stuff\images\\bigbaddude3.png')]
-badrobot3 = [pygame.image.load('Class Stuff\images\\bigbaddude1.png')]
-badrobot4 = [pygame.image.load('Class Stuff\images\\bigbaddude2.png')]
-bossrobot = [pygame.image.load('Class Stuff\images\Reallybaddude.png')]
-golem = [pygame.image.load('Class Stuff\images\Golem1.png')]
+badrobot1 = [pygame.image.load('Class Stuff\images\Bad dudes\smallbaddude1.png')]
+badrobot2 = [pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude3.png')]
+badrobot3 = [pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude1.png')]
+badrobot4 = [pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude2.png')]
+bossrobot = [pygame.image.load('Class Stuff\images\Bad dudes\Reallybaddude.png')]
+golem = [pygame.image.load('Class Stuff\images\Bad dudes\Golem1.png')]
+thwomp = [pygame.image.load('Class Stuff\images\Bad dudes\\thwomp.png')]
 
 #Booleans:
 Area1 = True
@@ -55,29 +56,28 @@ char_hb = 40
 char_wb = 40
 xc = 15
 yc = HEIGHT-64
-# hitbox = pygame.Rect(xc,yc,char_wb,char_hb)
+char_hitbox = pygame.Rect(xc,yc,char_wb,char_hb)
 vel=5
 
 
 
-def gamewindow(key):
-    global walkCount, Area1, Area2, Area3, Area4, Area5, bg, right, xc, KEY
+def gamewindow(KEY):
+    global walkCount, Area1, Area2, Area3, Area4, Area5, bg, right, xc, key
     if Area2:
-        print (xc)
-        bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd2.png'), (700,600))
-        if key:  
-            
+        
+        bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd2.png'), (700,600))
+        if KEY :  
             if xc < WIDTH - vel - 64:
                 xc += vel
                 right = True
             else:
-                
+                print (yc)
                 xc=0
                 Area2=False
                 Area3=True
     if Area3:
         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd3.png'), (700,600))
-        if key:  
+        if KEY and Area3:  
             if xc < WIDTH - vel - 64:
                 xc += vel
                 right = True
@@ -87,7 +87,7 @@ def gamewindow(key):
                 Area4=True
     if Area4:
         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd4.png'), (700,600))
-        if key:  
+        if KEY and Area4:  
             if xc < WIDTH - vel - 64:
                 xc += vel
                 right = True
@@ -107,10 +107,10 @@ def gamewindow(key):
         win.blit(char,(xc, yc))
         walkCount=0
     pygame.display.update()
-    KEY = False
+    key = False
 run = True
-KEY = False
-while run:
+key = False
+while run: 
     clock.tick(27)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -139,7 +139,7 @@ while run:
         else:
             jumpCount = 10
             isJump = False
-    gamewindow(KEY)
+    gamewindow(key)
 pygame.quit()
 
 
