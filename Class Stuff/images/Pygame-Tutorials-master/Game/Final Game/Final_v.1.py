@@ -60,12 +60,12 @@ char_hitbox = pygame.Rect(xc,yc,char_wb,char_hb)
 vel=5
 
 
-
 def gamewindow(KEY):
-    global walkCount, Area1, Area2, Area3, Area4, Area5, bg, right, xc, key
+    global walkCount, Area1, Area2, Area3, Area4, Area5, bg, right, xc, keyddddddd
+   
     if Area2:
-        
-        bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd2.png'), (700,600))
+       
+        bg = bg2
         if KEY :  
             if xc < WIDTH - vel - 64:
                 xc += vel
@@ -76,7 +76,7 @@ def gamewindow(KEY):
                 Area2=False
                 Area3=True
     if Area3:
-        bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd3.png'), (700,600))
+        bg =bg3
         if KEY and Area3:  
             if xc < WIDTH - vel - 64:
                 xc += vel
@@ -86,7 +86,8 @@ def gamewindow(KEY):
                 Area3=False
                 Area4=True
     if Area4:
-        bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd4.png'), (700,600))
+       
+        bg = bg4
         if KEY and Area4:  
             if xc < WIDTH - vel - 64:
                 xc += vel
@@ -96,10 +97,11 @@ def gamewindow(KEY):
                 Area4=False
                 Area5=True
     if Area5:
-        bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd5.jpg'), (700,600))
+       
+        bg =bg5
     win.blit(bg,(0,0))
     if walkCount+1>=27:
-        walkCount=0           
+        walkCount=0          
     elif right:
         win.blit(running[walkCount//3],(xc,yc))
         walkCount+=1
@@ -110,21 +112,29 @@ def gamewindow(KEY):
     key = False
 run = True
 key = False
-while run: 
+while run:
     clock.tick(27)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_d]: 
+    if keys[pygame.K_d]:
         key = True 
         if xc < WIDTH - vel - 64:
             xc += vel
             right = True
-        else:
+        elif Area1:
             xc=0
             Area1=False
             Area2=True
+        elif Area2:
+            xc=0
+            Area2=False
+            Area3=True    
+        elif Area3:
+            xc=0
+            Area3=False
+            Area4=True 
     else:
         right = False
         walkCount = 0
@@ -140,6 +150,86 @@ while run:
             jumpCount = 10
             isJump = False
     gamewindow(key)
+# def gamewindow(KEY):
+#     global walkCount, Area1, Area2, Area3, Area4, Area5, bg, right, xc, key
+#     if Area2:
+        
+#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd2.png'), (700,600))
+#         if KEY :  
+#             if xc < WIDTH - vel - 64:
+#                 xc += vel
+#                 right = True
+#             else:
+#                 print (yc)
+#                 xc=0
+#                 Area2=False
+#                 Area3=True
+#     if Area3:
+#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd3.png'), (700,600))
+#         if KEY and Area3:  
+#             if xc < WIDTH - vel - 64:
+#                 xc += vel
+#                 right = True
+#             else:
+#                 xc=0
+#                 Area3=False
+#                 Area4=True
+#     if Area4:
+#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd4.png'), (700,600))
+#         if KEY and Area4:  
+#             if xc < WIDTH - vel - 64:
+#                 xc += vel
+#                 right = True
+#             else:
+#                 xc=0
+#                 Area4=False
+#                 Area5=True
+#     if Area5:
+#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd5.jpg'), (700,600))
+#     win.blit(bg,(0,0))
+#     if walkCount+1>=27:
+#         walkCount=0           
+#     elif right:
+#         win.blit(running[walkCount//3],(xc,yc))
+#         walkCount+=1
+#     else:
+#         win.blit(char,(xc, yc))
+#         walkCount=0
+#     pygame.display.update()
+#     key = False
+# run = True
+# key = False
+# while run: 
+#     clock.tick(27)
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             run = False
+#     keys = pygame.key.get_pressed()
+#     if keys[pygame.K_d]: 
+#         key = True 
+#         if xc < WIDTH - vel - 64:
+#             xc += vel
+#             right = True
+#         else:
+#             xc=0
+#             Area1=False
+#             Area2=True
+#     else:
+#         right = False
+#         walkCount = 0
+#     if not(isJump):
+#         if keys[pygame.K_SPACE]:
+#             isJump = True
+#             walkCount = 0
+#     else:
+#         if jumpCount >= -10:
+#             yc -= (jumpCount * abs(jumpCount)) * 0.5
+#             jumpCount -= 1
+#         else:
+#             jumpCount = 10
+#             isJump = False
+#     gamewindow(key)
+
 pygame.quit()
 
 
