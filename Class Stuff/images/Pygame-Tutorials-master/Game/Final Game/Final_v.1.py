@@ -23,17 +23,17 @@ attacking = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Attack
 running = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_03.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_04.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_05.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_06.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_07.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_08.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\\new-run_09.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\Run2_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\Run2_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Running\Run2_03.png'), (64,64))]
 jumping = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping\Jumping_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping\Jumping_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Jumping\Jumping_03.png'), (64,64))]
 crouching = [pygame.transform.scale(pygame.image.load('Class Stuff\images\Crouching\crouching_01.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Crouching\crouching_02.png'), (64,64)), pygame.transform.scale(pygame.image.load('Class Stuff\images\Crouching\crouching_03.png'), (64,64))]
-thwomp = [pygame.image.load('Class Stuff\images\Bad dudes\\thwomp.png')]
-fireball = [pygame.image.load('Class Stuff\images\Fireball\\fireball_02.png')]
+thwomp = pygame.image.load('Class Stuff\images\Bad dudes\\thwomp.png')
+fireball = pygame.image.load('Class Stuff\images\Fireball\\fireball_02.png')
 
 #robots/bad guys
-badrobot1 = [pygame.image.load('Class Stuff\images\Bad dudes\smallbaddude1.png')]
-badrobot2 = [pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude3.png')]
-badrobot3 = [pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude1.png')]
-badrobot4 = [pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude2.png')]
-bossrobot = [pygame.image.load('Class Stuff\images\Bad dudes\Reallybaddude.png')]
-golem = [pygame.image.load('Class Stuff\images\Bad dudes\Golem1.png')]
-thwomp = [pygame.image.load('Class Stuff\images\Bad dudes\\thwomp.png')]
+badrobot = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\smallbaddude1.png'), (180,180))
+badrobot2 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude3.png'), (180,180))
+badrobot3 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude1.png'), (180,180))
+badrobot4 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude2.png'), (180,180))
+bossrobot = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\Reallybaddude.png'), (180,180))
+golem = pygame.image.load('Class Stuff\images\Bad dudes\Golem1.png')
+thwomp = pygame.image.load('Class Stuff\images\Bad dudes\\thwomp.png')
 
 #Booleans:
 Area1 = True
@@ -57,19 +57,30 @@ char_wb = 40
 xc = 15
 yc = HEIGHT-64
 char_hitbox = pygame.Rect(xc,yc,char_wb,char_hb)
-vel=5
+vel=5  
+badxc = WIDTH-180
+badyc = HEIGHT-160
+bad_wb = 180
+bad_hb = 180
+bad_hitbox = pygame.Rect(badxc,badyc,bad_wb,bad_hb)
+projectile_vel = 7
 
-
-def gamewindow(KEY):
-    global walkCount, Area1, Area2, Area3, Area4, Area5, bg, right, xc, keyddddddd
-   
+run = True
+key = False
+while run:
+    clock.tick(27)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
     if Area2:
-       
+        
         bg = bg2
-        if KEY :  
+        badrobot =badrobot2
+        if pygame.key.get_pressed()[pygame.K_d] :  
             if xc < WIDTH - vel - 64:
                 xc += vel
                 right = True
+                attack = False
             else:
                 print (yc)
                 xc=0
@@ -77,10 +88,12 @@ def gamewindow(KEY):
                 Area3=True
     if Area3:
         bg =bg3
-        if KEY and Area3:  
+        badrobot = badrobot3
+        if pygame.key.get_pressed()[pygame.K_d]:  
             if xc < WIDTH - vel - 64:
                 xc += vel
                 right = True
+                attack = False
             else:
                 xc=0
                 Area3=False
@@ -88,10 +101,12 @@ def gamewindow(KEY):
     if Area4:
        
         bg = bg4
-        if KEY and Area4:  
+        badrobot = badrobot4
+        if pygame.key.get_pressed()[pygame.K_d]and Area4:  
             if xc < WIDTH - vel - 64:
                 xc += vel
                 right = True
+                attack = False
             else:
                 xc=0
                 Area4=False
@@ -99,7 +114,9 @@ def gamewindow(KEY):
     if Area5:
        
         bg =bg5
+        badrobot = bossrobot
     win.blit(bg,(0,0))
+    win.blit(badrobot, (badxc,badyc))
     if walkCount+1>=27:
         walkCount=0          
     elif right:
@@ -110,13 +127,6 @@ def gamewindow(KEY):
         walkCount=0
     pygame.display.update()
     key = False
-run = True
-key = False
-while run:
-    clock.tick(27)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
     keys = pygame.key.get_pressed()
     if keys[pygame.K_d]:
         key = True 
@@ -149,86 +159,6 @@ while run:
         else:
             jumpCount = 10
             isJump = False
-    gamewindow(key)
-# def gamewindow(KEY):
-#     global walkCount, Area1, Area2, Area3, Area4, Area5, bg, right, xc, key
-#     if Area2:
-        
-#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd2.png'), (700,600))
-#         if KEY :  
-#             if xc < WIDTH - vel - 64:
-#                 xc += vel
-#                 right = True
-#             else:
-#                 print (yc)
-#                 xc=0
-#                 Area2=False
-#                 Area3=True
-#     if Area3:
-#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd3.png'), (700,600))
-#         if KEY and Area3:  
-#             if xc < WIDTH - vel - 64:
-#                 xc += vel
-#                 right = True
-#             else:
-#                 xc=0
-#                 Area3=False
-#                 Area4=True
-#     if Area4:
-#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd4.png'), (700,600))
-#         if KEY and Area4:  
-#             if xc < WIDTH - vel - 64:
-#                 xc += vel
-#                 right = True
-#             else:
-#                 xc=0
-#                 Area4=False
-#                 Area5=True
-#     if Area5:
-#         bg = pygame.transform.scale(pygame.image.load('Class Stuff\images\\finalgamebkgd5.jpg'), (700,600))
-#     win.blit(bg,(0,0))
-#     if walkCount+1>=27:
-#         walkCount=0           
-#     elif right:
-#         win.blit(running[walkCount//3],(xc,yc))
-#         walkCount+=1
-#     else:
-#         win.blit(char,(xc, yc))
-#         walkCount=0
-#     pygame.display.update()
-#     key = False
-# run = True
-# key = False
-# while run: 
-#     clock.tick(27)
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             run = False
-#     keys = pygame.key.get_pressed()
-#     if keys[pygame.K_d]: 
-#         key = True 
-#         if xc < WIDTH - vel - 64:
-#             xc += vel
-#             right = True
-#         else:
-#             xc=0
-#             Area1=False
-#             Area2=True
-#     else:
-#         right = False
-#         walkCount = 0
-#     if not(isJump):
-#         if keys[pygame.K_SPACE]:
-#             isJump = True
-#             walkCount = 0
-#     else:
-#         if jumpCount >= -10:
-#             yc -= (jumpCount * abs(jumpCount)) * 0.5
-#             jumpCount -= 1
-#         else:
-#             jumpCount = 10
-#             isJump = False
-#     gamewindow(key)
 
 pygame.quit()
 
