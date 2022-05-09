@@ -449,16 +449,24 @@ def Game():
             pygame.quit()
 while check:
 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            check = False 
 
+        if event.type==pygame.MOUSEBUTTONDOWN:
 
+            mouse_pos=pygame.mouse.get_pos()
+
+            print(mouse_pos)
+
+            xm = mouse_pos[0]
+
+            ym = mouse_pos[1]
+    keys=pygame.key.get_pressed() #this returns a list
     if MAIN:
-
         pygame.display.set_caption('Menu')
-
         win.fill(background)
-
         TitleMenu("Circle eats Square")
-
         MainMenu(MenuList)
 
     if INST:
@@ -563,177 +571,161 @@ while check:
 
         check = False
 
-    for case in pygame.event.get():
-
-        if case.type==pygame.QUIT:
-
-            check=False
-
-    keys=pygame.key.get_pressed() #this returns a list
-
-    if case.type ==pygame.MOUSEBUTTONDOWN:
-
-        mouse_pos=pygame.mouse.get_pos()
-
-        print(mouse_pos)
-
-        xm = mouse_pos[0]
-
-        ym = mouse_pos[1]
-
-        if MAIN and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MAIN:
-
-            MAIN=False
-
-            INST=True
-
-        if MAIN and ((xm >20 and xm <80) and (ym >300 and ym <340))and MAIN :
-
-            MAIN=False
-
-            SETT=True
-
-        if MAIN and ((xm >20 and xm <80) and (ym >350 and ym <390))and MAIN :
-
-            MAIN=False
-
-            LEV_I=True
-
-        if MAIN and ((xm >20 and xm <80) and (ym >400 and ym <440))and MAIN :
-
-            MAIN=False
-
-            LEV_II=True
-
-        if MAIN and ((xm >20 and xm <80) and (ym >450 and ym <490))and MAIN :
-
-            MAIN=False
-
-            LEV_III=True
-
-        if MAIN and ((xm >20 and xm <80) and (ym >500 and ym <540))and MAIN :
-
-            MAIN=False
-
-            SCOREBOARD=True
-
-        if MAIN and ((xm >20 and xm <80) and (ym >550 and ym <590))and MAIN :
-
-            MAIN=False
-
-            EXIT=True
 
 
-        if SETT and ((xm >20 and xm <80) and (ym >250 and ym <290)) and SETT:
+    if MAIN and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MAIN:
 
-            SETT=False
+        MAIN=False
 
-            PROJECTILE=True
+        INST=True
 
-        if PROJECTILE and ((xm >20 and xm <80) and (ym >250 and ym <290)) and PROJECTILE:
-            
-            fireball = pygame.image.load('Class Stuff\images\Fireball\\fireball_02.png')
+    if MAIN and ((xm >20 and xm <80) and (ym >300 and ym <340))and MAIN :
 
-        if PROJECTILE and ((xm >20 and xm <80) and (ym >300 and ym <340))and PROJECTILE :
+        MAIN=False
 
-            fireball = pygame.image.load('Class Stuff\images\Fireball\meme.png')            
+        SETT=True
 
-        if PROJECTILE and ((xm >20 and xm <80) and (ym >350 and ym <390))and PROJECTILE :
+    if MAIN and ((xm >20 and xm <80) and (ym >350 and ym <390))and MAIN :
 
-            fireball = pygame.image.load('Class Stuff\images\Fireball\hit-effectnew.png')
+        MAIN=False
+
+        LEV_I=True
+
+    if MAIN and ((xm >20 and xm <80) and (ym >400 and ym <440))and MAIN :
+
+        MAIN=False
+
+        LEV_II=True
+
+    if MAIN and ((xm >20 and xm <80) and (ym >450 and ym <490))and MAIN :
+
+        MAIN=False
+
+        LEV_III=True
+
+    if MAIN and ((xm >20 and xm <80) and (ym >500 and ym <540))and MAIN :
+
+        MAIN=False
+
+        SCOREBOARD=True
+
+    if MAIN and ((xm >20 and xm <80) and (ym >550 and ym <590))and MAIN :
+
+        MAIN=False
+
+        EXIT=True
+
+
+    if SETT and ((xm >20 and xm <80) and (ym >250 and ym <290)) and SETT:
+
+        SETT=False
+
+        PROJECTILE=True
+
+    if PROJECTILE and ((xm >20 and xm <80) and (ym >250 and ym <290)) and PROJECTILE:
         
-        if SETT and ((xm >20 and xm <80) and (ym >300 and ym <340))and SETT :
+        fireball = pygame.image.load('Class Stuff\images\Fireball\\fireball_02.png')
 
-            SETT=False
+    if PROJECTILE and ((xm >20 and xm <80) and (ym >300 and ym <340))and PROJECTILE :
 
-            BKGD=True
+        fireball = pygame.image.load('Class Stuff\images\Fireball\meme.png')            
 
-        if BKGD and ((xm >20 and xm <80) and (ym >250 and ym <290)) and BKGD:
+    if PROJECTILE and ((xm >20 and xm <80) and (ym >350 and ym <390))and PROJECTILE :
 
-            background=colors.get('red')
+        fireball = pygame.image.load('Class Stuff\images\Fireball\hit-effectnew.png')
+    
+    if SETT and ((xm >20 and xm <80) and (ym >300 and ym <340))and SETT :
 
-            pygame.display.update()
+        SETT=False
 
-        if BKGD and ((xm >20 and xm <80) and (ym >300 and ym <340))and BKGD :
+        BKGD=True
 
-            background=colors.get('green')
+    if BKGD and ((xm >20 and xm <80) and (ym >250 and ym <290)) and BKGD:
 
-            pygame.display.update()
+        background=colors.get('red')
 
-        if BKGD and ((xm >20 and xm <80) and (ym >350 and ym <390))and BKGD:
+        pygame.display.update()
 
-            background=colors.get('blue')
+    if BKGD and ((xm >20 and xm <80) and (ym >300 and ym <340))and BKGD :
 
-            pygame.display.update()
+        background=colors.get('green')
 
-        if BKGD and ((xm >20 and xm <80) and (ym >400 and ym <440))and BKGD:
+        pygame.display.update()
 
-            background=colors.get('cyan')
+    if BKGD and ((xm >20 and xm <80) and (ym >350 and ym <390))and BKGD:
 
-            pygame.display.update()
+        background=colors.get('blue')
 
-        if BKGD and ((xm >20 and xm <80) and (ym >450 and ym <490))and BKGD:
+        pygame.display.update()
 
-            background=colors.get('magenta')
+    if BKGD and ((xm >20 and xm <80) and (ym >400 and ym <440))and BKGD:
 
-            pygame.display.update()
+        background=colors.get('cyan')
 
-        if BKGD and ((xm >20 and xm <80) and (ym >500 and ym <540))and BKGD:
+        pygame.display.update()
 
-            background=colors.get('black')
+    if BKGD and ((xm >20 and xm <80) and (ym >450 and ym <490))and BKGD:
 
-            pygame.display.update()
+        background=colors.get('magenta')
 
-        if BKGD and ((xm >20 and xm <80) and (ym >550 and ym <590))and BKGD:
+        pygame.display.update()
 
-            background=colors.get('white')
+    if BKGD and ((xm >20 and xm <80) and (ym >500 and ym <540))and BKGD:
 
-            pygame.display.update()
+        background=colors.get('black')
 
-        if SETT and ((xm >20 and xm <80) and (ym >400 and ym <440))and SETT :
+        pygame.display.update()
 
-            SETT=False
+    if BKGD and ((xm >20 and xm <80) and (ym >550 and ym <590))and BKGD:
 
-            BKGDIMG=True
+        background=colors.get('white')
 
-        if BKGDIMG and ((xm >20 and xm <80) and (ym >250 and ym <290)) and BKGDIMG:
+        pygame.display.update()
 
-            bg = bg
+    if SETT and ((xm >20 and xm <80) and (ym >400 and ym <440))and SETT :
 
-        if BKGDIMG and ((xm >20 and xm <80) and (ym >300 and ym <340)) and BKGDIMG:
+        SETT=False
 
-            bg = bg2
+        BKGDIMG=True
 
-        if BKGDIMG and ((xm >20 and xm <80) and (ym >350 and ym <390)) and BKGDIMG:
+    if BKGDIMG and ((xm >20 and xm <80) and (ym >250 and ym <290)) and BKGDIMG:
 
-            bg = bg3
+        bg = bg
 
-        if BKGDIMG and ((xm >20 and xm <80) and (ym >400 and ym <440)) and BKGDIMG:
+    if BKGDIMG and ((xm >20 and xm <80) and (ym >300 and ym <340)) and BKGDIMG:
 
-            bg = bg4
+        bg = bg2
 
-        if BKGDIMG and ((xm >20 and xm <80) and (ym >450 and ym <490)) and BKGDIMG:
+    if BKGDIMG and ((xm >20 and xm <80) and (ym >350 and ym <390)) and BKGDIMG:
 
-            bg = bg5
+        bg = bg3
+
+    if BKGDIMG and ((xm >20 and xm <80) and (ym >400 and ym <440)) and BKGDIMG:
+
+        bg = bg4
+
+    if BKGDIMG and ((xm >20 and xm <80) and (ym >450 and ym <490)) and BKGDIMG:
+
+        bg = bg5
 
 
-        if SETT and ((xm >20 and xm <80) and (ym >450 and ym <490))and SETT :
+    if SETT and ((xm >20 and xm <80) and (ym >450 and ym <490))and SETT :
 
-            SETT=False
+        SETT=False
 
-            MVMT=True
+        MVMT=True
 
-        if MVMT and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MVMT:
-            
-            vel = 6
+    if MVMT and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MVMT:
+        
+        vel = 6
 
-        if MVMT and ((xm >20 and xm <80) and (ym >300 and ym <340))and MVMT :
+    if MVMT and ((xm >20 and xm <80) and (ym >300 and ym <340))and MVMT :
 
-            vel = 8
+        vel = 8
 
-        if MVMT and ((xm >20 and xm <80) and (ym >350 and ym <390))and MVMT :
+    if MVMT and ((xm >20 and xm <80) and (ym >350 and ym <390))and MVMT :
 
-            vel = 10
+        vel = 10
 
 
         
@@ -770,8 +762,6 @@ while check:
             MVMT = False
 
             MAIN=True
-
-
 
 
     pygame.display.update()
