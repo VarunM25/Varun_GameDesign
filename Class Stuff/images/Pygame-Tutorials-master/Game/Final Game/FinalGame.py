@@ -104,10 +104,10 @@ def Game():
     global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump
     while run:
         clock.tick(27)
-
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False 
+           if event.type == pygame.QUIT:
+              run = False 
+
         if Area1:
             pygame.draw.rect(win, (0,0,0), barrier, 3)
             pygame.draw.rect(win,(255,255,255), char_hitbox, 3)
@@ -218,4 +218,8 @@ def Game():
             pygame.display.update()
             key = False
             pygame.quit()
-Game()
+
+for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        run = False 
+    Game()

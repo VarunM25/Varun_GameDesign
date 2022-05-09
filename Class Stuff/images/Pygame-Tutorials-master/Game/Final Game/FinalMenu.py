@@ -7,6 +7,7 @@ HEIGHT = 700
 
 os.system('cls')
 pygame.init()
+name = input('What is your name: ')
 win=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption('Final Game')
 #Menu Booleans:
@@ -38,8 +39,6 @@ MVMT = False
 
 check = True
 
-xm=0
-ym=0
 #Menu variables
 
 wb_btn=30
