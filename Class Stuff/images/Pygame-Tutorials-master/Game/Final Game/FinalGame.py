@@ -1,12 +1,10 @@
 #Varun Mukund
 #Version 1 of Final Game
 import os, pygame, random, datetime
-
-WIDTH = 700
-HEIGHT = 700 
-
 os.system('cls')
 pygame.init()
+WIDTH = 700
+HEIGHT = 700 
 win=pygame.display.set_mode((WIDTH,HEIGHT)) 
 pygame.display.set_caption('Final Game')
 
@@ -16,6 +14,7 @@ bg2 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\
 bg3 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd3.png'), (700,700))
 bg4 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd4.png'), (700,700))
 bg5 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Backgrounds\\finalgamebkgd5.jpg'), (700,700))
+
 
 # Character movements
 char = pygame.transform.scale(pygame.image.load('Class Stuff\images\Idle-stance_04.png'), (64,64))
@@ -58,9 +57,6 @@ right=False
 walkCount=0
 attackCount=0
 
-
-
-
 char_hb = 60
 char_wb = 40
 xc = 15
@@ -99,20 +95,24 @@ bombh = 50
 bombhitbox = pygame.Rect(bombx,bomby,bombw,bombh)
 bombvel = 10
 
-def Game():
+def GamePlay():
     global char_hb, char_wb, xc, yc, char_hitbox, vel, badxc, badyc, bad_wb, bad_hb, barrier_wb, barrier_xc, barrier_yc, barrier_hb, bad_hitbox, xf, yf, wf, hf, projhitbox, projectile_vel, barrier, healthy
     global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump
+    MAX=10
+    jumpCount=10
     while run:
         clock.tick(27)
         for event in pygame.event.get():
            if event.type == pygame.QUIT:
               run = False 
-
+    
         if Area1:
-            pygame.draw.rect(win, (0,0,0), barrier, 3)
-            pygame.draw.rect(win,(255,255,255), char_hitbox, 3)
-            pygame.draw.rect(win, (0,0,0), projhitbox, 3)
+
+            pygame.draw.rect(win, (0,0,0), barrier)
+            pygame.draw.rect(win,(255,255,255), char_hitbox)
+            pygame.draw.rect(win, (0,0,0), projhitbox)
             win.blit(bg,(0,0))
+            
             if bad:
                 win.blit(badrobot, (badxc,badyc))
         
@@ -134,9 +134,6 @@ def Game():
                         run = False
                 else:
                     bombing = False
-
-
-
             pygame.draw.rect (win,(0,255,0), healthbar, 100)
             if walkCount+1>=27:
                 walkCount=0          
@@ -169,7 +166,6 @@ def Game():
                     bad = False
                     pygame.time.get_ticks
             if keys[pygame.K_d] :# and not barrier.colliderect(char_hitbox):
-                key = True 
                 if xc < WIDTH - vel - 64:
                     char_hitbox.x += vel
                     xc+=vel
@@ -194,7 +190,6 @@ def Game():
                         vel = 0
                 else:
                     vel = 7
-
             else:
                 right = False
                 walkCount = 0
@@ -203,23 +198,22 @@ def Game():
                     isJump = True
                     walkCount = 0
             else:
-                if jumpCount >= -10:
+                if jumpCount >= -MAX:
                     char_hitbox.y -= (jumpCount * abs(jumpCount)) * 0.5
                     yc -= (jumpCount * abs(jumpCount)) * 0.5
                     jumpCount -= 1
                     char_hitbox.y=yc
                 else:
-                    jumpCount = 10
-                    isJump = False
-
-                        
-
+                    jumpCount = MAX
+                    isJump = False                
             #print (Area1)
             pygame.display.update()
-            key = False
-            pygame.quit()
-
-for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-        run = False 
-    Game()
+            # pygame.quit()
+while run:
+    for event in pygame.event.get():
+        win.blit(bg,(0,0))
+        if event.type == pygame.QUIT:
+            run = False
+        pygame.display.update() 
+    GamePlay()
+pygame.quit()
