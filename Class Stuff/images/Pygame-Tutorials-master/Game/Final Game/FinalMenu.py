@@ -268,6 +268,11 @@ while check:
 
         instScreen()
 
+        if keys[pygame.K_ESCAPE]:
+            INST = False
+            MAIN = True
+
+
     if SETT:
 
         pygame.display.set_caption('Settings')
@@ -275,12 +280,18 @@ while check:
         TitleMenu("SETTINGS")
 
         MainMenu(SettingList)
+        if keys[pygame.K_ESCAPE]:
+            SETT = False
+            MAIN = True
 
     if LEV_I:
 
         pygame.display.set_caption('Level 1')
 
         # Game()
+        if keys[pygame.K_ESCAPE]:
+            LEV_I = False
+            MAIN = True
 
     if LEV_II:
 
@@ -290,6 +301,10 @@ while check:
         
         # Game()
 
+        if keys[pygame.K_ESCAPE]:
+            LEV_II = False
+            MAIN = True
+
     if LEV_III:
 
         pygame.display.set_caption('Level 3')
@@ -297,6 +312,10 @@ while check:
         bombvel = 30
         
         # Game()
+
+        if keys[pygame.K_ESCAPE]:
+            LEV_III = False
+            MAIN = True
 
     if SCOREBOARD:
 
@@ -320,6 +339,10 @@ while check:
 
         pygame.display.update() 
 
+        if keys[pygame.K_ESCAPE]:
+            SCOREBOARD = False
+            MAIN = True
+
     if PROJECTILE:
 
         pygame.display.set_caption('Projectile Image')
@@ -327,6 +350,10 @@ while check:
         TitleMenu("Projectile")
 
         MainMenu(Projimage)
+
+        if keys[pygame.K_ESCAPE]:
+            PROJECTILE = False
+            SETT = True
 
     if BKGD:
 
@@ -336,6 +363,11 @@ while check:
 
         MainMenu(Bkgd)
 
+        if keys[pygame.K_ESCAPE]:
+            BKGD = False
+            SETT = True
+        
+
 
     if MVMT:
 
@@ -344,6 +376,10 @@ while check:
         TitleMenu("Speed")
 
         MainMenu(Mvmtspeed)
+
+        if keys[pygame.K_ESCAPE]:
+            MVMT = False
+            SETT = True
     
     if BKGDIMG:
         pygame.display.set_caption('Background Image')
@@ -351,6 +387,10 @@ while check:
         TitleMenu('Bkgd Image')
 
         MainMenu(Bkgdimage)
+
+        if keys[pygame.K_ESCAPE]:
+            BKGDIMG = False
+            SETT = True
 
 
     if EXIT:
@@ -361,6 +401,8 @@ while check:
         keepScore(Gamescore)
 
         check = False
+
+
 
 
 

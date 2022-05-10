@@ -36,6 +36,8 @@ thwomp = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\
 bomb = pygame.transform.scale(pygame.image.load('Class Stuff\images\Fireball\\newbomb.png'), (50,50))
 explosion = pygame.transform.scale(pygame.image.load('Class Stuff\images\Fireball\hit-effectnew.png'), (20,20))
 meme = pygame.transform.scale(pygame.image.load('Class Stuff\images\Fireball\meme.png'), (20,20))
+confetti = pygame.transform.scale(pygame.image.load('Class Stuff\images\Fireball\confetti-emojigood.png'), (50,50))
+confetti2 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Fireball\confetti-emojigood.png'), (50,50))
 Area1 = True
 Area2 = False
 Area3 = False
@@ -72,8 +74,8 @@ barrier_xc = badxc
 barrier_yc = 0
 barrier_hb = HEIGHT
 bad_hitbox = pygame.Rect(badxc,badyc,bad_wb,bad_hb)
-xf = char_hitbox.x 
-yf = char_hitbox.y 
+xf = char_hitbox.x+40
+yf = char_hitbox.y + 15
 wf = 30
 hf = 30
 projhitbox = pygame.Rect(xf,yf,wf,hf)
@@ -94,7 +96,13 @@ bombw = 50
 bombh = 50
 bombhitbox = pygame.Rect(bombx,bomby,bombw,bombh)
 bombvel = 10
-
+ENDING_FNT=pygame.font.SysFont('courier',60)
+congrats = ENDING_FNT.render('CONGRATS! YOU WON!!!',1,'white')
+def congratulations():
+    win.fill(green)
+    win.blit(congrats, (25,300))
+    win.blit(confetti, (280,400))
+    win.blit(confetti2, (380,400))
 def GamePlay():
     global char_hb, char_wb, xc, yc, char_hitbox, vel, badxc, badyc, bad_wb, bad_hb, barrier_wb, barrier_xc, barrier_yc, barrier_hb, bad_hitbox, xf, yf, wf, hf, projhitbox, projectile_vel, barrier, healthy
     global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump
@@ -158,10 +166,10 @@ def GamePlay():
                 healthw = healthw-20
                 healthbar = pygame.Rect(badxc, healthy, healthw, healthh)
                 attack = False
-                xf = char_hitbox.x
-                projhitbox.x = char_hitbox.x  
-                yf = char_hitbox.y 
-                projhitbox.y = char_hitbox.y
+                xf = char_hitbox.x+40
+                projhitbox.x = char_hitbox.x+40
+                yf = char_hitbox.y + 15
+                projhitbox.y = char_hitbox.y+15
                 if healthw <= 0:
                     bad = False
                     pygame.time.get_ticks
@@ -170,21 +178,10 @@ def GamePlay():
                     char_hitbox.x += vel
                     xc+=vel
                     right = True
-                elif Area1: # will get executed only when the char is at the end fo the screen
-                    xc=0
-                    Area1=False
-                    Area2=True
-                    char_hitbox.x = 0
-                # elif Area2:
-                #     xc=0
-                #     Area2=False
-                #     Area3=True   
-                #     char_hitbox.x = 0 
-                # elif Area3:
-                #     xc=0
-                #     Area3=False
-                #     Area4=True 
-                #     char_hitbox.x = 0
+                elif Area1:
+                    Area2 = True
+
+
                 if healthw > 0:
                     if barrier.colliderect(char_hitbox):
                         vel = 0
@@ -205,12 +202,10 @@ def GamePlay():
                     char_hitbox.y=yc
                 else:
                     jumpCount = MAX
-<<<<<<< HEAD
                     isJump = False   
-                     
-=======
-                    isJump = False                
->>>>>>> 326f8f9cfe2bb2d750491e6270b9314b0424ab0a
+            if xc >= WIDTH - vel - 64:
+                congratulations()
+
             #print (Area1)
             pygame.display.update()
             # pygame.quit()
@@ -221,8 +216,4 @@ while run:
             run = False
         pygame.display.update() 
     GamePlay()
-<<<<<<< HEAD
 pygame.quit()
-=======
-pygame.quit()
->>>>>>> 326f8f9cfe2bb2d750491e6270b9314b0424ab0a
