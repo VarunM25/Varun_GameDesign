@@ -205,8 +205,12 @@ def GamePlay():
                     char_hitbox.y=yc
                 else:
                     jumpCount = MAX
+<<<<<<< HEAD
                     isJump = False   
                      
+=======
+                    isJump = False                
+>>>>>>> 326f8f9cfe2bb2d750491e6270b9314b0424ab0a
             #print (Area1)
             pygame.display.update()
             # pygame.quit()
@@ -217,4 +221,8 @@ while run:
             run = False
         pygame.display.update() 
     GamePlay()
+<<<<<<< HEAD
 pygame.quit()
+=======
+pygame.quit()
+>>>>>>> 326f8f9cfe2bb2d750491e6270b9314b0424ab0a
