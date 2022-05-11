@@ -565,9 +565,11 @@ while check:
     if EXIT:
 
         TitleMenu("Game Over")
+        if #level1>0 and level2score>0 and level3score>0
+        # Create stopwatch for each level
+            Gamescore = 
 
-
-        keepScore(Gamescore)
+            keepScore(Gamescore)
 
         check = False
 
