@@ -1,6 +1,6 @@
 #Varun Mukund
 #Version 1 of Final Game
-import os, pygame, random, datetime
+import os, pygame, random, datetime, time
 
 WIDTH = 700
 HEIGHT = 700 
