@@ -325,6 +325,7 @@ def GamePlay3():
                     xf += vel
                     right = True
                 elif Area1:
+                    lvl3_Score = round(lvl3_end_time - lvl3_start_time,0)
                     Area2 = True
                     
 
@@ -360,7 +361,7 @@ def GamePlay3():
             lvl3_end_time=time.time() 
             #print (lvl3_end_time)
             congratulations(1)
-        lvl3_Score = round(lvl3_end_time - lvl3_start_time,0)
+        
         
 def Gameplay2():
     global lvl2_end_time

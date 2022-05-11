@@ -379,7 +379,8 @@ def congratulations(decision):
         win.blit(sorry, (25,300))
         win.blit(endingmsg, (WIDTH/2-150, 500))
     pygame.display.update()
-    pygame.time.delay(5000)
+    if keys[pygame.K_ESCAPE]:
+        MAIN = True
 def GamePlay3():
     global lvl3_end_time
     Area1 = True
@@ -911,29 +912,30 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         pygame.display.update() 
-    GamePlay()
+    
 pygame.quit()
 
-while check:
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            check = False 
-
-        if event.type==pygame.MOUSEBUTTONDOWN:
-
-            mouse_pos=pygame.mouse.get_pos()
-
-            print(mouse_pos)
-
-            xm = mouse_pos[0]
-
-            ym = mouse_pos[1]
+while check: 
+    
     keys=pygame.key.get_pressed() #this returns a list
+
+
+
+    if event.type==pygame.MOUSEBUTTONDOWN:
+
+        mouse_pos=pygame.mouse.get_pos()
+
+        print(mouse_pos)
+
+        xm = mouse_pos[0]
+
+        ym = mouse_pos[1]
+
     if MAIN:
+        print ("ddd")
         pygame.display.set_caption('Menu')
         win.fill(background)
-        TitleMenu("Circle eats Square")
+        TitleMenu("Double Shooters")
         MainMenu(MenuList)
 
     if INST:
@@ -963,7 +965,7 @@ while check:
     if LEV_I:
 
         pygame.display.set_caption('Level 1')
-
+        GamePlay()
         # Game()
         if keys[pygame.K_ESCAPE]:
             LEV_I = False
@@ -973,10 +975,9 @@ while check:
 
         pygame.display.set_caption('Level 2')
 
-        bombvel = 20
         
         # Game()
-
+        Gameplay2()
         if keys[pygame.K_ESCAPE]:
             LEV_II = False
             MAIN = True
@@ -985,8 +986,7 @@ while check:
 
         pygame.display.set_caption('Level 3')
 
-        bombvel = 30
-        
+        GamePlay3()
         # Game()
 
         if keys[pygame.K_ESCAPE]:
@@ -1073,8 +1073,10 @@ while check:
 
         TitleMenu("Game Over")
 
+        if lvl1Score>0 and lvl2_Score>0 and lvl3_Score>0:
+            Gamescore = lvl1Score + lvl2_Score + lvl3_Score
 
-        keepScore(Gamescore)
+            keepScore(Gamescore)
 
         check = False
 
@@ -1277,17 +1279,13 @@ while check:
 
     pygame.time.delay(1)
 
+while check:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            check = False
+    pygame.display.update()
 
-    # if EXIT:
 
-    #     TitleMenu("Game Over")
-    #     if #level1>0 and level2score>0 and level3score>0
-    #     # Create stopwatch for each level
-    #         Gamescore = 
-
-    #         keepScore(Gamescore)
-
-    # check = False
 
 
 
