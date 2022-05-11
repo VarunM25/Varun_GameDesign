@@ -67,6 +67,13 @@ char_hitbox = pygame.Rect(xc,yc,char_wb,char_hb)
 
 lvl1Score=0
 lvl1_start_time=time.time()
+lvl2_Score = 0
+lvl2_start_time = time.time()
+lvl3_Score = 0 
+lvl3_start_time = time.time()
+lvl1_end_time = 0
+lvl2_end_time = 0
+lvl3_end_time = 0
 
 #right hitbox variables
 char_right_hb=20
@@ -123,12 +130,29 @@ bombhitbox = pygame.Rect(bombx,bomby,bombw,bombh)
 bombvel = 10
 ENDING_FNT=pygame.font.SysFont('courier',60)
 congrats = ENDING_FNT.render('CONGRATS! YOU WON!!!',1,'white')
-def congratulations():
-    win.fill(green)
-    win.blit(congrats, (25,300))
-    win.blit(confetti, (280,400))
-    win.blit(confetti2, (380,400))
+sorry = ENDING_FNT.render('SORRY!... You lost...',1, 'white')
+INST_FNT=pygame.font.SysFont('calibri',25)
+
+
+
+def congratulations(decision):
+    global endingtime, endingmsg
+    endingtime = lvl1Score+lvl2_Score+lvl3_Score
+    endingmsg = INST_FNT.render('Your score was ' +str(endingtime)+ ' points',1, 'white' )
+    if decision == 1:
+        win.fill(green)
+        win.blit(congrats, (25,300))
+        win.blit(confetti, (280,400))
+        win.blit(confetti2, (380,400))
+        win.blit(endingmsg, (WIDTH/2-150, 500))
+    elif decision == 0:
+        win.fill(green)
+        win.blit(sorry, (25,300))
+        win.blit(endingmsg, (WIDTH/2-150, 500))
+    pygame.display.update()
+    pygame.time.delay(5000)
 def GamePlay3():
+    global lvl3_end_time
     Area1 = True
     attack = False
     idle = True
@@ -213,7 +237,7 @@ def GamePlay3():
     jumpCount=10
     while run:
         clock.tick(27)
-        print(round(time.time()-lvl1_start_time,0),'sec')
+        #print(round(time.time()-lvl3_start_time,0),'sec')
         for event in pygame.event.get():
            if event.type == pygame.QUIT:
               run = False 
@@ -231,8 +255,7 @@ def GamePlay3():
             pygame.draw.rect(win, (0,0,0), projhitbox)
             win.blit(bg,(0,0))
             win.blit(golem,(gx,gy))
-            
-            
+            badrobot = bossrobot
             if bad:
                 win.blit(badrobot, (badxc,badyc))
         
@@ -258,6 +281,8 @@ def GamePlay3():
                         bombhitbox.x -= bombvel
                     if bombhitbox.colliderect(char_hitbox) or thwomphb.colliderect(char_hitbox):
                         run = False
+                        lvl3_Score = 0
+                        congratulations(0)
                     else: 
                         run = True
                 else:
@@ -283,13 +308,13 @@ def GamePlay3():
                 xf+= projectile_vel
                 projhitbox.x+= projectile_vel
             if projhitbox.colliderect(barrier):
-                healthw = healthw-20
+                healthw = healthw-10
                 healthbar = pygame.Rect(badxc, healthy, healthw, healthh)
                 attack = False
                 xf = char_hitbox.x+40
                 projhitbox.x = char_hitbox.x+40
-                yf = char_hitbox.y + 15
-                projhitbox.y = char_hitbox.y+15
+                yf = char_hitbox.y + 17
+                projhitbox.y = char_hitbox.y+17
                 if healthw <= 0:
                     bad = False
             if keys[pygame.K_d] and not character_right_hitbox.colliderect(golem_hitbox):# and not barrier.colliderect(char_hitbox):
@@ -301,6 +326,7 @@ def GamePlay3():
                     right = True
                 elif Area1:
                     Area2 = True
+                    
 
 
 
@@ -330,8 +356,14 @@ def GamePlay3():
                     isJump = False   
 
             pygame.display.update()
-        lvl1_end_time=time.time()
+        if xc >= WIDTH - vel - 64:
+            lvl3_end_time=time.time() 
+            #print (lvl3_end_time)
+            congratulations(1)
+        lvl3_Score = round(lvl3_end_time - lvl3_start_time,0)
+        
 def Gameplay2():
+    global lvl2_end_time
     Area1 = True
     attack = False
     idle = True
@@ -405,7 +437,7 @@ def Gameplay2():
     jumpCount=10
     while run:
         clock.tick(27)
-        print(round(time.time()-lvl1_start_time,0),'sec')
+        #print(round(time.time()-lvl2_start_time,0),'sec')
         for event in pygame.event.get():
            if event.type == pygame.QUIT:
               run = False 
@@ -422,7 +454,7 @@ def Gameplay2():
             pygame.draw.rect(win, (0,0,0), projhitbox)
             win.blit(bg,(0,0))
             win.blit(golem,(gx,gy))
-            
+            badrobot = badrobot2
             if bad:
                 win.blit(badrobot, (badxc,badyc))
         
@@ -441,6 +473,9 @@ def Gameplay2():
                         run = True
                     else: 
                         run = False
+                        lvl2_Score = 0
+                        lvl3_Score = 0
+                        congratulations(0)
                 else:
                     bombing = False
             pygame.draw.rect (win,(0,255,0), healthbar, 100)
@@ -482,6 +517,8 @@ def Gameplay2():
                 elif Area1:
                     Area2 = True
                 if xc >= WIDTH - vel - 64:
+                    lvl2_end_time=time.time() 
+                    lvl2_Score = round(lvl2_end_time - lvl2_start_time,0)
                     GamePlay3()
                     run = False
 
@@ -515,16 +552,18 @@ def Gameplay2():
                     isJump = False   
 
             pygame.display.update()
-        lvl1_end_time=time.time()
+            
+                
 
 def GamePlay():
     global char_hb, char_wb, xc, yc, char_hitbox, vel, badxc, badyc, bad_wb, bad_hb, barrier_wb, barrier_xc, barrier_yc, barrier_hb, bad_hitbox, xf, yf, wf, hf, projhitbox, projectile_vel, barrier, healthy
-    global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump
+    global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump, lvl1Score, lvl2_Score, lvl3_Score
+    global lvl1_start_time, lvl2_start_time, lvl3_start_time, lvl1_end_time 
     MAX=10
     jumpCount=10
     while run:
         clock.tick(27)
-        print(round(time.time()-lvl1_start_time,0),'sec')
+        #print(round(time.time()-lvl1_start_time,0),'sec')
         for event in pygame.event.get():
            if event.type == pygame.QUIT:
               run = False 
@@ -557,6 +596,10 @@ def GamePlay():
                         run = True
                     else: 
                         run = False
+                        lvl1Score=0
+                        lvl2_Score = 0
+                        lvl3_Score = 0
+                        congratulations(0)
                 else:
                     bombing = False
             pygame.draw.rect (win,(0,255,0), healthbar, 100)
@@ -624,13 +667,14 @@ def GamePlay():
                     jumpCount = MAX
                     isJump = False   
             if xc >= WIDTH - vel - 64:
+                lvl1_end_time=time.time()
+                lvl1Score = round(lvl1_end_time - lvl1_start_time,0)
                 Gameplay2()
                 run = False
 
-            pygame.display.update()
-            
-        lvl1_end_time=time.time()
 
+            pygame.display.update()
+                
 
 while run:
     for event in pygame.event.get():
