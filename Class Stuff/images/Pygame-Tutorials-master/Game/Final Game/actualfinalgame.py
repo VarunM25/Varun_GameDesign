@@ -358,16 +358,16 @@ def keepScore(score):
 
     #when you write it erases the previous text
 
-    myFile=open('Class Stuff\Circle Eats Square\\final.txt','a')
+    myFile=open('Class Stuff\images\Pygame-Tutorials-master\Game\Final Game\\final.txt','a')
 
     myFile.write(scoreLine)
 
     myFile.close()
-
+#MERGE WITH THE GAME CODE
 def congratulations(decision):
-    global endingtime, endingmsg
-    endingtime = lvl1Score+lvl2_Score+lvl3_Score
-    endingmsg = INST_FNT.render('Your score was ' +str(endingtime)+ ' points',1, 'white' )
+    global score, endingmsg
+    score = lvl1Score+lvl2_Score+lvl3_Score
+    endingmsg = INST_FNT.render('Your score was ' +str(score)+ ' points',1, 'white' )
     if decision == 1:
         win.fill(green)
         win.blit(congrats, (25,300))
@@ -381,6 +381,9 @@ def congratulations(decision):
     pygame.display.update()
     if keys[pygame.K_ESCAPE]:
         MAIN = True
+        LEV_I = False
+        LEV_II = False
+        LEV_III = False
 def GamePlay3():
     global lvl3_end_time
     Area1 = True
@@ -555,10 +558,8 @@ def GamePlay3():
                     xf += vel
                     right = True
                 elif Area1:
+                    lvl3_Score = round(lvl3_end_time - lvl3_start_time,0)
                     Area2 = True
-                    
-
-
 
                 if healthw > 0:
                     if barrier.colliderect(char_hitbox):
@@ -673,14 +674,10 @@ def Gameplay2():
               run = False 
     
         if Area1:
-            
-
             pygame.draw.rect(win, (0,0,0), barrier)
             pygame.draw.rect(win,(255,255,255), char_hitbox)
             pygame.draw.rect(win,(255,255,255), character_right_hitbox)
             pygame.draw.rect(win,(255,0,0),golem_hitbox)
-            
-            
             pygame.draw.rect(win, (0,0,0), projhitbox)
             win.blit(bg,(0,0))
             win.blit(golem,(gx,gy))
@@ -751,9 +748,6 @@ def Gameplay2():
                     lvl2_Score = round(lvl2_end_time - lvl2_start_time,0)
                     GamePlay3()
                     run = False
-
-
-
                 if healthw > 0:
                     if barrier.colliderect(char_hitbox):
                         vel = 0
@@ -782,153 +776,151 @@ def Gameplay2():
                     isJump = False   
 
             pygame.display.update()
-            
-                
-
+        
 def GamePlay():
     global char_hb, char_wb, xc, yc, char_hitbox, vel, badxc, badyc, bad_wb, bad_hb, barrier_wb, barrier_xc, barrier_yc, barrier_hb, bad_hitbox, xf, yf, wf, hf, projhitbox, projectile_vel, barrier, healthy
     global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump, lvl1Score, lvl2_Score, lvl3_Score
     global lvl1_start_time, lvl2_start_time, lvl3_start_time, lvl1_end_time 
+    global LEV_I,MAIN
     MAX=10
     jumpCount=10
     while run:
         clock.tick(27)
+       
         #print(round(time.time()-lvl1_start_time,0),'sec')
         for event in pygame.event.get():
            if event.type == pygame.QUIT:
               run = False 
     
-        if Area1:
-
-            pygame.draw.rect(win, (0,0,0), barrier)
-            pygame.draw.rect(win,(255,255,255), char_hitbox)
-            
-            
-            pygame.draw.rect(win, (0,0,0), projhitbox)
-            win.blit(bg,(0,0))
-
-            
-            if bad:
-                win.blit(badrobot, (badxc,badyc))
         
-            if bombing:
-                if healthw>0:
-                    win.blit(bomb, (bombx, bomby))
-                    bombx -= 10
-                    bombhitbox.x -= 10
-                    if bombhitbox.x <= 0:
-                        bombx = WIDTH-150
-                        bombhitbox.x = WIDTH-150
-                        win.blit(bomb, (bombx, bomby))  
-                        bombx -= bombvel
-                        bombhitbox.x -= bombvel
-                    if not bombhitbox.colliderect(char_hitbox):
-                        run = True
-                    else: 
-                        run = False
-                        lvl1Score=0
-                        lvl2_Score = 0
-                        lvl3_Score = 0
-                        congratulations(0)
-                else:
-                    bombing = False
-            pygame.draw.rect (win,(0,255,0), healthbar, 100)
-            if walkCount+1>=27:
-                walkCount=0          
-            elif right:
-                win.blit(running[walkCount//3],(xc,yc))
-                walkCount+=1
-            else:
-                if idle:
-                    win.blit(char,(xc, yc))
-                    walkCount=0
-
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_j]:
-                attack=True
-            if attack:
-                
-                win.blit(fireball,(xf,yf))
-                xf+= projectile_vel
-                projhitbox.x+= projectile_vel
-            if projhitbox.colliderect(barrier):
-                healthw = healthw-20
-                healthbar = pygame.Rect(badxc, healthy, healthw, healthh)
-                attack = False
-                xf = char_hitbox.x+40
-                projhitbox.x = char_hitbox.x+40
-                yf = char_hitbox.y + 15
-                projhitbox.y = char_hitbox.y+15
-                if healthw <= 0:
-                    bad = False
-            if keys[pygame.K_d]:# and not barrier.colliderect(char_hitbox):
-                if xc < WIDTH - vel - 64:
-                    char_hitbox.x += vel
-                    xc+=vel
-                    xf += vel
-                    right = True
-                elif Area1:
-                    Area2 = True
-
-
-                if healthw > 0:
-                    if barrier.colliderect(char_hitbox):
-                        vel = 0
-                else:
-                    vel = 7
-            else:
-                right = False
-                walkCount = 0
-            if keys[pygame.K_ESCAPE]:
-                run = False
-            if keys[pygame.K_3]:
-                GamePlay3()
-            if not(isJump):
-                if keys[pygame.K_SPACE]:
-                    isJump = True
-                    walkCount = 0
-            else:
-                if jumpCount >= -MAX:
-                    char_hitbox.y -= (jumpCount * abs(jumpCount)) * 0.5
-                    yc -= (jumpCount * abs(jumpCount)) * 0.5
-                    jumpCount -= 1
-                    char_hitbox.y=yc
-                else:
-                    jumpCount = MAX
-                    isJump = False   
-            if xc >= WIDTH - vel - 64:
-                lvl1_end_time=time.time()
-                lvl1Score = round(lvl1_end_time - lvl1_start_time,0)
-                Gameplay2()
-                run = False
-
-
-            pygame.display.update()
-                
-
-while run:
-    for event in pygame.event.get():
+        keys = pygame.key.get_pressed()
+        pygame.draw.rect(win, (0,0,0), barrier)
+        pygame.draw.rect(win,(255,255,255), char_hitbox)
+        pygame.draw.rect(win, (0,0,0), projhitbox)
         win.blit(bg,(0,0))
-        if event.type == pygame.QUIT:
-            run = False
-        pygame.display.update() 
+
+        
+        if bad:
+            win.blit(badrobot, (badxc,badyc))
     
-pygame.quit()
+        if bombing:
+            if healthw>0:
+                win.blit(bomb, (bombx, bomby))
+                bombx -= 10
+                bombhitbox.x -= 10
+                if bombhitbox.x <= 0:
+                    bombx = WIDTH-150
+                    bombhitbox.x = WIDTH-150
+                    win.blit(bomb, (bombx, bomby))  
+                    bombx -= bombvel
+                    bombhitbox.x -= bombvel
+                if not bombhitbox.colliderect(char_hitbox):
+                    run = True
+                else: 
+                    run = False
+                    lvl1Score=0
+                    lvl2_Score = 0
+                    lvl3_Score = 0
+                    congratulations(0)
+                    
+            else:
+                bombing = False
+        pygame.draw.rect (win,(0,255,0), healthbar, 100)
+        if walkCount+1>=27:
+            walkCount=0          
+        elif right:
+            win.blit(running[walkCount//3],(xc,yc))
+            walkCount+=1
+        else:
+            if idle:
+                win.blit(char,(xc, yc))
+                walkCount=0
+
+        
+        if keys[pygame.K_j]:
+            attack=True
+        if attack:
+            
+            win.blit(fireball,(xf,yf))
+            xf+= projectile_vel
+            projhitbox.x+= projectile_vel
+        if projhitbox.colliderect(barrier):
+            healthw = healthw-20
+            healthbar = pygame.Rect(badxc, healthy, healthw, healthh)
+            attack = False
+            xf = char_hitbox.x+40
+            projhitbox.x = char_hitbox.x+40
+            yf = char_hitbox.y + 15
+            projhitbox.y = char_hitbox.y+15
+            if healthw <= 0:
+                bad = False
+        if keys[pygame.K_d]:# and not barrier.colliderect(char_hitbox):
+            if xc < WIDTH - vel - 64:
+                char_hitbox.x += vel
+                xc+=vel
+                xf += vel
+                right = True
+            elif Area1:
+                Area2 = True
+
+
+            if healthw > 0:
+                if barrier.colliderect(char_hitbox):
+                    vel = 0
+            else:
+                vel = 7
+        else:
+            right = False
+            walkCount = 0
+        if keys[pygame.K_ESCAPE]:
+            run = False
+        if keys[pygame.K_3]:
+            GamePlay3()
+        if not(isJump):
+            if keys[pygame.K_SPACE]:
+                isJump = True
+                walkCount = 0
+        else:
+            if jumpCount >= -MAX:
+                char_hitbox.y -= (jumpCount * abs(jumpCount)) * 0.5
+                yc -= (jumpCount * abs(jumpCount)) * 0.5
+                jumpCount -= 1
+                char_hitbox.y=yc
+            else:
+                jumpCount = MAX
+                isJump = False   
+        if xc >= WIDTH - vel - 64:
+            lvl1_end_time=time.time()
+            lvl1Score = round(lvl1_end_time - lvl1_start_time,0)
+            Gameplay2()
+            run = False
+
+
+        pygame.display.update()
+            
+
+# while run:
+#     for event in pygame.event.get():
+#         win.blit(bg,(0,0))
+#         if event.type == pygame.QUIT:
+#             run = False
+#         pygame.display.update() 
+    
+# pygame.quit()
 
 while check: 
-    
+    win.fill(background)
+    for event in pygame.event.get():
+        
+        if event.type == pygame.QUIT:
+            run = False
+ 
     keys=pygame.key.get_pressed() #this returns a list
 
-
-
     if event.type==pygame.MOUSEBUTTONDOWN:
-
         mouse_pos=pygame.mouse.get_pos()
-
         print(mouse_pos)
-
         xm = mouse_pos[0]
-
         ym = mouse_pos[1]
 
     if MAIN:
@@ -941,43 +933,34 @@ while check:
     if INST:
 
         pygame.display.set_caption('Instructions')
-
         TitleMenu("INSTRUCTIONS")
-
         instScreen()
-
         if keys[pygame.K_ESCAPE]:
             INST = False
             MAIN = True
 
-
     if SETT:
-
         pygame.display.set_caption('Settings')
-
         TitleMenu("SETTINGS")
-
         MainMenu(SettingList)
         if keys[pygame.K_ESCAPE]:
             SETT = False
             MAIN = True
 
     if LEV_I:
-
         pygame.display.set_caption('Level 1')
         GamePlay()
+        run = False
         # Game()
         if keys[pygame.K_ESCAPE]:
             LEV_I = False
             MAIN = True
 
     if LEV_II:
-
         pygame.display.set_caption('Level 2')
-
-        
         # Game()
         Gameplay2()
+        run = False
         if keys[pygame.K_ESCAPE]:
             LEV_II = False
             MAIN = True
@@ -987,6 +970,7 @@ while check:
         pygame.display.set_caption('Level 3')
 
         GamePlay3()
+        run = False
         # Game()
 
         if keys[pygame.K_ESCAPE]:
@@ -999,7 +983,7 @@ while check:
 
         TitleMenu("SCOREBOARD")
 
-        myFile=open('Class Stuff\Circle Eats Square\\final.txt','r')
+        myFile=open('Class Stuff\images\Pygame-Tutorials-master\Game\Final Game\\final.txt','r')
 
         scoreboardlines = myFile.readlines()
 
@@ -1066,6 +1050,7 @@ while check:
 
         if keys[pygame.K_ESCAPE]:
             BKGDIMG = False
+
             SETT = True
 
 
@@ -1079,10 +1064,6 @@ while check:
             keepScore(Gamescore)
 
         check = False
-
-
-
-
 
     if MAIN and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MAIN:
 
@@ -1145,7 +1126,7 @@ while check:
 
         fireball = pygame.image.load('Class Stuff\images\Fireball\hit-effectnew.png')
     
-    if SETT and ((xm >20 and xm <80) and (ym >300 and ym <340))and SETT :
+    if SETT and ((xm >80 and xm <180) and (ym >300 and ym <340))and SETT :
 
         SETT=False
 
@@ -1240,40 +1221,6 @@ while check:
 
 
         
-
-    if keys[pygame.K_LSHIFT]:
-
-        BKGD = False
-
-        SETT = True
-    if keys[pygame.K_ESCAPE]:
-
-            GAME=False
-
-            INST=False
-
-            SETT=False
-
-            LEV_I=False
-
-            LEV_II=False
-
-            LEV_III=False
-
-            SCOREBOARD=False
-
-            EXIT=False
-
-            PROJECTILE = False
-
-            BKGD = False
-
-            BKGDIMG = False
-
-            MVMT = False
-
-            MAIN=True
-
 
     pygame.display.update()
 
