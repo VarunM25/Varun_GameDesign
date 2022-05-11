@@ -31,7 +31,7 @@ badrobot2 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dud
 badrobot3 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude1.png'), (180,180))
 badrobot4 = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\\bigbaddude2.png'), (180,180))
 bossrobot = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\Reallybaddude.png'), (180,180))
-golem = pygame.image.load('Class Stuff\images\Bad dudes\Golem1.png')
+golem = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\Golem1.png'), (100,90))
 thwomp = pygame.transform.scale(pygame.image.load('Class Stuff\images\Bad dudes\\thwomp.png'), (30,30))
 bomb = pygame.transform.scale(pygame.image.load('Class Stuff\images\Fireball\\newbomb.png'), (50,50))
 explosion = pygame.transform.scale(pygame.image.load('Class Stuff\images\Fireball\hit-effectnew.png'), (20,20))
@@ -64,6 +64,28 @@ char_wb = 40
 xc = 15
 yc = HEIGHT-64
 char_hitbox = pygame.Rect(xc,yc,char_wb,char_hb)
+
+#right hitbox variables
+char_right_hb=20
+char_right_wb=20
+xc_r=xc+char_wb
+yc_r= yc+20
+character_right_hitbox=pygame.Rect(xc_r,yc_r,char_right_wb,char_right_hb)
+
+#bottom hitbox variables
+char_bottom_hb=20
+char_bottom_wb=20
+xc_b=xc+10
+yc_b=yc+char_hb
+character_bottom_hitbox=pygame.Rect(xc_b,yc_b,char_bottom_wb,char_bottom_hb)
+
+#golem hitboxes
+golem_wb = 100
+golem_hb = 90
+gx = WIDTH/2-200
+gy = yc
+golem_hitbox = pygame.Rect(gx,gy,golem_wb,golem_hb)
+
 vel=7 
 badxc = WIDTH-180
 badyc = HEIGHT-160
@@ -103,7 +125,7 @@ def congratulations():
     win.blit(congrats, (25,300))
     win.blit(confetti, (280,400))
     win.blit(confetti2, (380,400))
-def GamePlay():
+def Gameplay2():
     global char_hb, char_wb, xc, yc, char_hitbox, vel, badxc, badyc, bad_wb, bad_hb, barrier_wb, barrier_xc, barrier_yc, barrier_hb, bad_hitbox, xf, yf, wf, hf, projhitbox, projectile_vel, barrier, healthy
     global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump
     MAX=10
@@ -118,6 +140,8 @@ def GamePlay():
 
             pygame.draw.rect(win, (0,0,0), barrier)
             pygame.draw.rect(win,(255,255,255), char_hitbox)
+            
+            
             pygame.draw.rect(win, (0,0,0), projhitbox)
             win.blit(bg,(0,0))
             
@@ -156,7 +180,6 @@ def GamePlay():
             keys = pygame.key.get_pressed()
             if keys[pygame.K_j]:
                 attack=True
-            # for i in range (len(attacking)):
             if attack:
                 
                 win.blit(fireball,(xf,yf))
@@ -173,10 +196,123 @@ def GamePlay():
                 if healthw <= 0:
                     bad = False
                     pygame.time.get_ticks
-            if keys[pygame.K_d] :# and not barrier.colliderect(char_hitbox):
+            if keys[pygame.K_d] and not character_right_hitbox.colliderect(golem_hitbox):# and not barrier.colliderect(char_hitbox):
+                if xc < WIDTH - vel - 64:
+                    char_hitbox.x += vel
+                    character_right_hitbox.x+=vel
+                    xc+=vel
+                    xf += vel
+                    right = True
+                elif Area1:
+                    Area2 = True
+
+
+                if healthw > 0:
+                    if barrier.colliderect(char_hitbox):
+                        vel = 0
+                else:
+                    vel = 7
+            else:
+                right = False
+                walkCount = 0
+            if not(isJump):
+                if keys[pygame.K_SPACE]:
+                    isJump = True
+                    walkCount = 0
+            else:
+                if jumpCount >= -MAX:
+                    char_hitbox.y -= (jumpCount * abs(jumpCount)) * 0.5
+                    yc -= (jumpCount * abs(jumpCount)) * 0.5
+                    jumpCount -= 1
+                    char_hitbox.y=yc
+                    character_right_hitbox.y=yc
+                else:
+                    jumpCount = MAX
+                    isJump = False   
+            if xc >= WIDTH - vel - 64:
+                congratulations()
+
+            pygame.display.update()
+
+def GamePlay():
+    global char_hb, char_wb, xc, yc, char_hitbox, vel, badxc, badyc, bad_wb, bad_hb, barrier_wb, barrier_xc, barrier_yc, barrier_hb, bad_hitbox, xf, yf, wf, hf, projhitbox, projectile_vel, barrier, healthy
+    global healthw, healthh, healthbar, bombnumber, green, run, key, bombx, bomby, bombw, bombh, bombhitbox, bombvel, Area1, bad, bombing, walkCount, right, attack, isJump
+    MAX=10
+    jumpCount=10
+    while run:
+        clock.tick(27)
+        for event in pygame.event.get():
+           if event.type == pygame.QUIT:
+              run = False 
+    
+        if Area1:
+
+            pygame.draw.rect(win, (0,0,0), barrier)
+            pygame.draw.rect(win,(255,255,255), char_hitbox)
+            
+            
+            pygame.draw.rect(win, (0,0,0), projhitbox)
+            win.blit(bg,(0,0))
+            pygame.draw.rect(win,(255,255,255), character_right_hitbox)
+            pygame.draw.rect(win,(255,0,0),golem_hitbox)
+            win.blit
+            
+            if bad:
+                win.blit(badrobot, (badxc,badyc))
+        
+            if bombing:
+                if healthw>0:
+                    win.blit(bomb, (bombx, bomby))
+                    bombx -= 10
+                    bombhitbox.x -= 10
+                    print (bombhitbox.x)
+                    if bombhitbox.x <= 0:
+                        bombx = WIDTH-150
+                        bombhitbox.x = WIDTH-150
+                        win.blit(bomb, (bombx, bomby))  
+                        bombx -= bombvel
+                        bombhitbox.x -= bombvel
+                    if not bombhitbox.colliderect(char_hitbox):
+                        run = True
+                    else: 
+                        run = False
+                else:
+                    bombing = False
+            pygame.draw.rect (win,(0,255,0), healthbar, 100)
+            if walkCount+1>=27:
+                walkCount=0          
+            elif right:
+                win.blit(running[walkCount//3],(xc,yc))
+                walkCount+=1
+            else:
+                if idle:
+                    win.blit(char,(xc, yc))
+                    walkCount=0
+
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_j]:
+                attack=True
+            if attack:
+                
+                win.blit(fireball,(xf,yf))
+                xf+= projectile_vel
+                projhitbox.x+= projectile_vel
+            if projhitbox.colliderect(barrier):
+                healthw = healthw-20
+                healthbar = pygame.Rect(badxc, healthy, healthw, healthh)
+                attack = False
+                xf = char_hitbox.x+40
+                projhitbox.x = char_hitbox.x+40
+                yf = char_hitbox.y + 15
+                projhitbox.y = char_hitbox.y+15
+                if healthw <= 0:
+                    bad = False
+                    pygame.time.get_ticks
+            if keys[pygame.K_d]:# and not barrier.colliderect(char_hitbox):
                 if xc < WIDTH - vel - 64:
                     char_hitbox.x += vel
                     xc+=vel
+                    xf += vel
                     right = True
                 elif Area1:
                     Area2 = True
@@ -206,9 +342,7 @@ def GamePlay():
             if xc >= WIDTH - vel - 64:
                 congratulations()
 
-            #print (Area1)
             pygame.display.update()
-            # pygame.quit()
 while run:
     for event in pygame.event.get():
         win.blit(bg,(0,0))
