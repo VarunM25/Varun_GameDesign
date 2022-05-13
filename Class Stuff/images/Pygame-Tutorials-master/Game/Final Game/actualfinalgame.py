@@ -2,6 +2,7 @@
 #Version 1 of Final Game
 import os, pygame, random, datetime, time
 os.system('cls')
+name = input('Enter your player name: ')
 pygame.init()
 WIDTH = 700
 HEIGHT = 700 
@@ -123,6 +124,7 @@ bombnumber = random.randint(1, 10)
 # Just creates a color for the health bar
 green=(18,230,3)
 run = True
+newgame = True
 key = False
 bombx = WIDTH-150
 bomby = HEIGHT-80
@@ -169,7 +171,7 @@ ys_btn=250
 
 MenuList=['Instruction','Setting','Level 1','Level 2','Level 3','Scoreboard','Exit']
 
-SettingList=['Projectile Image','Background Color','Sound','Background Image', 'Movement Speed'] 
+SettingList=['Projectile Image','Background Color','Screen Size','Background Image', 'Movement Speed'] 
 
 Projimage = ['Fireball', 'Meme', 'Explosion']
 
@@ -378,12 +380,19 @@ def congratulations(decision):
         win.fill(green)
         win.blit(sorry, (25,300))
         win.blit(endingmsg, (WIDTH/2-150, 500))
+    newgame = True
     pygame.display.update()
-    if keys[pygame.K_ESCAPE]:
-        MAIN = True
-        LEV_I = False
-        LEV_II = False
-        LEV_III = False
+    pygame.time.delay(5000)
+    MAIN = True
+    LEV_I = False
+    LEV_II = False
+    LEV_III = False
+    
+    # if keys[pygame.K_ESCAPE]:
+    #     MAIN = True
+    #     LEV_I = False
+    #     LEV_II = False
+    #     LEV_III = False
 def GamePlay3():
     global lvl3_end_time
     Area1 = True
@@ -516,6 +525,7 @@ def GamePlay3():
                         run = False
                         lvl3_Score = 0
                         congratulations(0)
+                        
                     else: 
                         run = True
                 else:
@@ -699,9 +709,9 @@ def Gameplay2():
                     if not bombhitbox.colliderect(char_hitbox):
                         run = True
                     else: 
-                        run = False
                         lvl2_Score = 0
                         lvl3_Score = 0
+                        run = False
                         congratulations(0)
                 else:
                     bombing = False
@@ -784,6 +794,7 @@ def GamePlay():
     global LEV_I,MAIN
     MAX=10
     jumpCount=10
+    
     while run:
         clock.tick(27)
        
@@ -919,16 +930,18 @@ while check:
 
     if event.type==pygame.MOUSEBUTTONDOWN:
         mouse_pos=pygame.mouse.get_pos()
-        print(mouse_pos)
+        #print(mouse_pos)
         xm = mouse_pos[0]
         ym = mouse_pos[1]
 
     if MAIN:
-        print ("ddd")
+        #print ("ddd")
+        print ("In main menu")
         pygame.display.set_caption('Menu')
         win.fill(background)
         TitleMenu("Double Shooters")
         MainMenu(MenuList)
+        
 
     if INST:
 
@@ -949,8 +962,14 @@ while check:
 
     if LEV_I:
         pygame.display.set_caption('Level 1')
+        run = True
         GamePlay()
         run = False
+        LEV_I = False
+        MAIN = True
+        
+        
+        
         # Game()
         if keys[pygame.K_ESCAPE]:
             LEV_I = False
@@ -958,24 +977,18 @@ while check:
 
     if LEV_II:
         pygame.display.set_caption('Level 2')
-        # Game()
         Gameplay2()
         run = False
-        if keys[pygame.K_ESCAPE]:
-            LEV_II = False
-            MAIN = True
+        LEV_II = False
+        MAIN = True     
 
     if LEV_III:
 
         pygame.display.set_caption('Level 3')
-
         GamePlay3()
         run = False
-        # Game()
-
-        if keys[pygame.K_ESCAPE]:
-            LEV_III = False
-            MAIN = True
+        LEV_III = False
+        MAIN = True
 
     if SCOREBOARD:
 
@@ -1065,35 +1078,47 @@ while check:
 
         check = False
 
-    if MAIN and ((xm >20 and xm <80) and (ym >250 and ym <290)) and MAIN:
+    if MAIN and ((xm >20 and xm <80) and (ym >250 and ym <290))  :
 
         MAIN=False
 
         INST=True
 
-    if MAIN and ((xm >20 and xm <80) and (ym >300 and ym <340))and MAIN :
+    if MAIN and ((xm >20 and xm <80) and (ym >300 and ym <340)) :
 
         MAIN=False
 
         SETT=True
 
-    if MAIN and ((xm >20 and xm <80) and (ym >350 and ym <390))and MAIN :
+    if MAIN and ((xm >20 and xm <80) and (ym >350 and ym <390)) and newgame   :
 
+        
+        
         MAIN=False
-
+        
         LEV_I=True
+        newgame = False
+        
+        print ("here")
+        
+        
 
-    if MAIN and ((xm >20 and xm <80) and (ym >400 and ym <440))and MAIN :
+    if MAIN and ((xm >20 and xm <80) and (ym >400 and ym <440)) and newgame  :
 
+       
         MAIN=False
 
         LEV_II=True
 
-    if MAIN and ((xm >20 and xm <80) and (ym >450 and ym <490))and MAIN :
+        newgame = False
 
+    if MAIN and ((xm >20 and xm <80) and (ym >450 and ym <490)) and newgame :
+
+        
         MAIN=False
 
         LEV_III=True
+        newgame = False
 
     if MAIN and ((xm >20 and xm <80) and (ym >500 and ym <540))and MAIN :
 
