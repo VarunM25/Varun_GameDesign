@@ -153,6 +153,8 @@ EXIT=False
 
 PROJECTILE = False
 
+SCREENSIZE = False
+
 BKGD = False
 
 BKGDIMG = False
@@ -176,6 +178,8 @@ SettingList=['Projectile Image','Background Color','Screen Size','Background Ima
 Projimage = ['Fireball', 'Meme', 'Explosion']
 
 Mvmtspeed = ['Normal', 'Fast', 'Hyperspeed']
+
+Scrnsize = ['Small', 'Medium', 'Large']
 
 Bkgd = ['Red', 'Green', 'Blue', 'Cyan', 'Magenta', 'Black', 'White']
 
@@ -350,11 +354,11 @@ def instScreen():
 
         pygame.time.delay(1)
 
-def keepScore(score):
+def keepScore(Gamescore):
 
     date=datetime.datetime.now()
 
-    scoreLine=str(score)+'\t'+name+'\t'+date.strftime('%m/%d/%Y'+'\n')
+    scoreLine=str(Gamescore)+'\t'+name+'\t'+date.strftime('%m/%d/%Y'+'\n')
 
     #open a file and write
 
@@ -599,9 +603,11 @@ def GamePlay3():
             pygame.display.update()
         if xc >= WIDTH - vel - 64:
             lvl3_end_time=time.time() 
+            lvl3_Score = round(lvl3_end_time - lvl3_start_time,0)
             #print (lvl3_end_time)
+            run = False
             congratulations(1)
-        lvl3_Score = round(lvl3_end_time - lvl3_start_time,0)
+        
         
 def Gameplay2():
     global lvl2_end_time
@@ -1039,6 +1045,14 @@ while check:
         if keys[pygame.K_ESCAPE]:
             BKGD = False
             SETT = True
+    if SCREENSIZE:
+        pygame.display.set_caption ('ScreenSize')
+        TitleMenu("Screensize")
+        MainMenu(Scrnsize)
+        if keys[pygame.K_ESCAPE]:
+            SCREENSIZE = False
+            SETT = True
+
         
 
 
@@ -1071,7 +1085,8 @@ while check:
 
         TitleMenu("Game Over")
 
-        if lvl1Score>0 and lvl2_Score>0 and lvl3_Score>0:
+        #if lvl1Score>0 and lvl2_Score>0 and lvl3_Score>0:
+        if(lvl1Score+lvl2_Score+lvl3_Score>0):
             Gamescore = lvl1Score + lvl2_Score + lvl3_Score
 
             keepScore(Gamescore)
@@ -1204,6 +1219,29 @@ while check:
         SETT=False
 
         BKGDIMG=True
+    if SETT and ((xm >20 and xm <80) and (ym >350 and ym <390)) and SETT:
+        SCREENSIZE = True
+
+        SETT = False
+    if SCREENSIZE and ((xm >20 and xm <80) and (ym >250 and ym <290)):
+        WIDTH = 600
+
+        HEIGHT = 600
+
+        win=pygame.display.set_mode((WIDTH,HEIGHT))
+    if SCREENSIZE and ((xm >20 and xm <80) and (ym >300 and ym <340)):
+        WIDTH = 700
+
+        HEIGHT = 700
+
+        win=pygame.display.set_mode((WIDTH,HEIGHT))
+    if SCREENSIZE and ((xm >20 and xm <80) and (ym >350 and ym <390)):
+        WIDTH = 800
+
+        HEIGHT = 800
+
+        win=pygame.display.set_mode((WIDTH,HEIGHT))
+
 
     if BKGDIMG and ((xm >20 and xm <80) and (ym >250 and ym <290)) and BKGDIMG:
 
