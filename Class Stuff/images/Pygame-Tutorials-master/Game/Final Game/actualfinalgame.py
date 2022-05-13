@@ -301,7 +301,7 @@ inst2=INST_FNT.render('2) Move forward by pressing "D".',1,'white')
 
 inst3=INST_FNT.render('3) Jump with the Space Bar to dodge the enemy missiles.',1,'white')
 
-inst4=INST_FNT.render('4) Press "F" to shoot a projectile.',1,'white')
+inst4=INST_FNT.render('4) Press "J" to shoot a projectile.',1,'white')
 
 inst5=INST_FNT.render('5) Kill the enemy robot.',1,'white')
 
@@ -371,9 +371,10 @@ def keepScore(Gamescore):
     myFile.close()
 #MERGE WITH THE GAME CODE
 def congratulations(decision):
-    global score, endingmsg
-    score = lvl1Score+lvl2_Score+lvl3_Score
-    endingmsg = INST_FNT.render('Your score was ' +str(score)+ ' points',1, 'white' )
+    global Gamescore, endingmsg
+    
+    Gamescore = lvl1Score+lvl2_Score+lvl3_Score
+    endingmsg = INST_FNT.render('Your score was ' +str(Gamescore)+ ' points',1, 'white' )
     if decision == 1:
         win.fill(green)
         win.blit(congrats, (25,300))
@@ -384,7 +385,7 @@ def congratulations(decision):
         win.fill(green)
         win.blit(sorry, (25,300))
         win.blit(endingmsg, (WIDTH/2-150, 500))
-    newgame = True
+    #newgame = True
     pygame.display.update()
     pygame.time.delay(5000)
     MAIN = True
@@ -529,7 +530,8 @@ def GamePlay3():
                         run = False
                         lvl3_Score = 0
                         congratulations(0)
-                        
+                        bombx = WIDTH-150
+                        bombhitbox.x = WIDTH-150
                     else: 
                         run = True
                 else:
@@ -602,6 +604,7 @@ def GamePlay3():
 
             pygame.display.update()
         if xc >= WIDTH - vel - 64:
+            lvl3_Score = 0
             lvl3_end_time=time.time() 
             lvl3_Score = round(lvl3_end_time - lvl3_start_time,0)
             #print (lvl3_end_time)
@@ -719,6 +722,8 @@ def Gameplay2():
                         lvl3_Score = 0
                         run = False
                         congratulations(0)
+                        bombx = WIDTH-150
+                        bombhitbox.x = WIDTH-150
                 else:
                     bombing = False
             pygame.draw.rect (win,(0,255,0), healthbar, 100)
@@ -760,6 +765,7 @@ def Gameplay2():
                 elif Area1:
                     Area2 = True
                 if xc >= WIDTH - vel - 64:
+                    lvl2_Score = 0
                     lvl2_end_time=time.time() 
                     lvl2_Score = round(lvl2_end_time - lvl2_start_time,0)
                     GamePlay3()
@@ -838,7 +844,12 @@ def GamePlay():
                     lvl1Score=0
                     lvl2_Score = 0
                     lvl3_Score = 0
+                    print("there")
                     congratulations(0)
+                    bombx = WIDTH-150
+                    bombhitbox.x = WIDTH-150
+                    
+                    
                     
             else:
                 bombing = False
@@ -907,6 +918,7 @@ def GamePlay():
                 jumpCount = MAX
                 isJump = False   
         if xc >= WIDTH - vel - 64:
+            lvl1Score = 0
             lvl1_end_time=time.time()
             lvl1Score = round(lvl1_end_time - lvl1_start_time,0)
             Gameplay2()
@@ -933,12 +945,16 @@ while check:
             run = False
  
     keys=pygame.key.get_pressed() #this returns a list
-
+    # if keys[pygame.K_ESCAPE]:
+    #         INST = False
+    #         MAIN = True
+    
     if event.type==pygame.MOUSEBUTTONDOWN:
         mouse_pos=pygame.mouse.get_pos()
         #print(mouse_pos)
         xm = mouse_pos[0]
         ym = mouse_pos[1]
+
 
     if MAIN:
         #print ("ddd")
@@ -947,6 +963,21 @@ while check:
         win.fill(background)
         TitleMenu("Double Shooters")
         MainMenu(MenuList)
+        LEV_I = False
+        Lev_II = False
+        Lev_III = False
+      
+        newgame = True
+        xm = 0
+        ym = 0
+        if event.type==pygame.MOUSEBUTTONDOWN:
+            mouse_pos=pygame.mouse.get_pos()
+        #print(mouse_pos)
+            xm = mouse_pos[0]
+            ym = mouse_pos[1]
+
+
+        
         
 
     if INST:
@@ -954,6 +985,7 @@ while check:
         pygame.display.set_caption('Instructions')
         TitleMenu("INSTRUCTIONS")
         instScreen()
+        MAIN = False
         if keys[pygame.K_ESCAPE]:
             INST = False
             MAIN = True
@@ -1112,7 +1144,10 @@ while check:
         MAIN=False
         
         LEV_I=True
+        Lev_II = False
+        Lev_III = False
         newgame = False
+        
         
         print ("here")
         
@@ -1124,6 +1159,8 @@ while check:
         MAIN=False
 
         LEV_II=True
+        LEV_I = False
+        Lev_III = False
 
         newgame = False
 
@@ -1133,6 +1170,8 @@ while check:
         MAIN=False
 
         LEV_III=True
+        Lev_I = False
+        Lev_II = False
         newgame = False
 
     if MAIN and ((xm >20 and xm <80) and (ym >500 and ym <540))and MAIN :
